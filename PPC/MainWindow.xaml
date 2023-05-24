@@ -40,6 +40,7 @@
             <Setter Property="TextBox.Foreground" Value="Black"/>
             <Setter Property="TextBox.FontWeight" Value="Regular"/>
             <Setter Property="TextBox.Padding" Value="15 0 0 0"/>
+            <Setter Property="TextBox.CaretBrush" Value="Black"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -58,17 +59,17 @@
             <StackPanel Width="600px">
                 <TextBlock Text="Username" Foreground="Black" Style="{StaticResource FontForMainButton}"/>
                 <Border Height="70" BorderBrush="Black" BorderThickness="1" CornerRadius="30">
-                    <TextBox VerticalContentAlignment="Center" Style="{StaticResource ForLoginAndPassword}">
+                    <TextBox x:Name="Login" VerticalContentAlignment="Center" Style="{StaticResource ForLoginAndPassword}">
                     </TextBox>
                 </Border>
                 <TextBlock Text="Password" Foreground="Black" Style="{StaticResource FontForMainButton}"/>
                 <Border Height="70" BorderBrush="Black" BorderThickness="1" CornerRadius="30">
-                    <PasswordBox Style="{StaticResource ForLoginAndPassword}">
+                    <PasswordBox x:Name="Password" Style="{StaticResource ForLoginAndPassword}">
                     </PasswordBox>
                 </Border>
             </StackPanel>
             <Border Width="500" Height="100" Margin="0 100 0 0" Background="#E84545" CornerRadius="50" BorderThickness="0">
-                <Button></Button>
+                <Button Click="Button_Click"></Button>
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="15" Color="Gray" ShadowDepth="2"></DropShadowEffect>
                 </Border.Effect>
