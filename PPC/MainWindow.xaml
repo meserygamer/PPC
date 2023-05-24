@@ -5,8 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPC"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1024px" Width="1440px">
+    <Window.Resources>
+        <Style x:Key="FontForMainButton">
+            <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
+            <Setter Property="TextBlock.FontSize" Value="32"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="TextBlock.FontWeight" Value="Regular"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#0000"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock
+                            Background="#0000"
+                            Text="SIGN IN"
+                            Style="{StaticResource FontForMainButton}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ForLoginAndPassword">
+            <Setter Property="TextBox.BorderBrush" Value="Black"/>
+            <Setter Property="TextBox.BorderThickness" Value="0"/>
+            <Setter Property="TextBox.Background" Value="#0000"/>
+            <Setter Property="TextBox.FontFamily" Value="Kadwa"/>
+            <Setter Property="TextBox.FontSize" Value="32"/>
+            <Setter Property="TextBox.Foreground" Value="Black"/>
+            <Setter Property="TextBox.FontWeight" Value="Regular"/>
+            <Setter Property="TextBox.Padding" Value="15 0 0 0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Canvas Grid.Column="0" Grid.Row="1" Background="#2B2E4A"></Canvas>
+        <Canvas Grid.Column="2" Grid.Row="1" Background="#2B2E4A"></Canvas>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Image Source="/Images/MainIcon.jpg" Width="450" Height="435" Margin="0 32 0 13"></Image>
+            <StackPanel Width="600px">
+                <TextBlock Text="Username" Foreground="Black" Style="{StaticResource FontForMainButton}"/>
+                <Border Height="70" BorderBrush="Black" BorderThickness="1" CornerRadius="30">
+                    <TextBox VerticalContentAlignment="Center" Style="{StaticResource ForLoginAndPassword}">
+                    </TextBox>
+                </Border>
+                <TextBlock Text="Password" Foreground="Black" Style="{StaticResource FontForMainButton}"/>
+                <Border Height="70" BorderBrush="Black" BorderThickness="1" CornerRadius="30">
+                    <PasswordBox Style="{StaticResource ForLoginAndPassword}">
+                    </PasswordBox>
+                </Border>
+            </StackPanel>
+            <Border Width="500" Height="100" Margin="0 100 0 0" Background="#E84545" CornerRadius="50" BorderThickness="0">
+                <Button></Button>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" Color="Gray" ShadowDepth="2"></DropShadowEffect>
+                </Border.Effect>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>
