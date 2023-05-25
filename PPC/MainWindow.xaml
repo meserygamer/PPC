@@ -7,40 +7,58 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1024px" Width="1440px">
     <Window.Resources>
-        <Style x:Key="FontForMainButton">
-            <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
-            <Setter Property="TextBlock.FontSize" Value="32"/>
-            <Setter Property="TextBlock.Foreground" Value="White"/>
-            <Setter Property="TextBlock.FontWeight" Value="Regular"/>
+        <Style x:Key="FontForTextBlockOnLoginAndPassword"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Abel [RUS by Daymarius]"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Regular"/>
         </Style>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="#0000"/>
-            <Setter Property="BorderThickness" Value="0"/>
+        <Style x:Key="FontForMainButton"
+               BasedOn="{StaticResource FontForTextBlockOnLoginAndPassword}"
+               TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Kadwa"/>
+        </Style>
+        <Style x:Key="StyleForLoginBox"
+               TargetType="TextBox">
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Text" Value=""/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <TextBlock
-                            Background="#0000"
-                            Text="SIGN IN"
-                            Style="{StaticResource FontForMainButton}"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"/>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="30">
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ForLoginAndPassword">
-            <Setter Property="TextBox.BorderBrush" Value="Black"/>
-            <Setter Property="TextBox.BorderThickness" Value="0"/>
-            <Setter Property="TextBox.Background" Value="#0000"/>
-            <Setter Property="TextBox.FontFamily" Value="Kadwa"/>
-            <Setter Property="TextBox.FontSize" Value="32"/>
-            <Setter Property="TextBox.Foreground" Value="Black"/>
-            <Setter Property="TextBox.FontWeight" Value="Regular"/>
-            <Setter Property="TextBox.Padding" Value="15 0 0 0"/>
-            <Setter Property="TextBox.CaretBrush" Value="Black"/>
+        <Style TargetType="Button" x:Key="StyleForAuthButton">
+            <Setter Property="Margin" Value="0,100,0,0"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="Background" Value="#E84545"/>
+            <Setter Property="Content" Value="ВОЙТИ"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background ="{TemplateBinding Background}"
+                                Width ="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                CornerRadius="50">
+                            <ContentControl HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <TextBlock Style="{StaticResource FontForMainButton}" Text="{TemplateBinding Content}"/>
+                            </ContentControl>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
     <Grid>
@@ -57,23 +75,12 @@
         <StackPanel Grid.Column="1" Grid.Row="1">
             <Image Source="/Images/MainIcon.jpg" Width="450" Height="435" Margin="0 32 0 13"></Image>
             <StackPanel Width="600px">
-                <TextBlock Text="Username" Foreground="Black" Style="{StaticResource FontForMainButton}"/>
-                <Border Height="70" BorderBrush="Black" BorderThickness="1" CornerRadius="30">
-                    <TextBox x:Name="Login" VerticalContentAlignment="Center" Style="{StaticResource ForLoginAndPassword}">
-                    </TextBox>
-                </Border>
-                <TextBlock Text="Password" Foreground="Black" Style="{StaticResource FontForMainButton}"/>
-                <Border Height="70" BorderBrush="Black" BorderThickness="1" CornerRadius="30">
-                    <PasswordBox x:Name="Password" Style="{StaticResource ForLoginAndPassword}">
-                    </PasswordBox>
-                </Border>
+                <TextBlock Text="Логин" Foreground="Black" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
+                <TextBox x:Name="Login" Style="{StaticResource StyleForLoginBox}"></TextBox>
+                <TextBlock Text="Пароль" Foreground="Black" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
+                <PasswordBox x:Name="Password"></PasswordBox>
             </StackPanel>
-            <Border Width="500" Height="100" Margin="0 100 0 0" Background="#E84545" CornerRadius="50" BorderThickness="0">
-                <Button Click="Button_Click"></Button>
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="15" Color="Gray" ShadowDepth="2"></DropShadowEffect>
-                </Border.Effect>
-            </Border>
+            <Button Style="{StaticResource StyleForAuthButton}" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>
