@@ -15,52 +15,6 @@ using System.Windows.Shapes;
 
 namespace PPC
 {
-    public class Authtorization
-    {
-        private static Authtorization instance;
-        public string login;
-        public string password;
-        private Authtorization()
-        {
-            login = "";
-            password = "";
-        }
-        public static Authtorization GetAuthorization()
-        {
-            if (instance == null)
-            {
-                instance = new Authtorization();
-                return instance;
-            }
-            else
-            {
-                return instance;
-            }
-        }
-        public void Authorization()
-        {
-            if (login.Length == 0)
-            {
-                MessageBox.Show("Введите значение в поле логина");
-                return;
-            }
-            if (password.Length == 0)
-            {
-                MessageBox.Show("Введите значение в поле пароля");
-                return;
-            }
-            using(UserContext db = new UserContext())
-            {
-                if (db.Date_Users.Where(a => a.Password == password && a.Login == login).Count() == 0)
-                {
-                    MessageBox.Show("Вход в систему неудачен");
-                    return;
-                }
-                else App.AuthorizationData = (db.Date_Users.Where(a => a.Password == password && a.Login == login).First());
-                MessageBox.Show("Вход выполнен успешно");
-            }
-        }
-    }
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -69,16 +23,16 @@ namespace PPC
         public MainWindow()
         {
             InitializeComponent();
-            Login.TextChanged += Login_TextChanged;
-            Password.PasswordChanged += Password_PasswordChanged;
+            Login.LostFocus += Login_TextChanged;
+            Password.LostFocus += Password_PasswordChanged;
         }
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            Authtorization.GetAuthorization().password = Password.Password;
+            Authtorization.GetAuthorization().Password = ((PasswordBox)sender).Password;
         }
-        private void Login_TextChanged(object sender, TextChangedEventArgs e)
+        private void Login_TextChanged(object sender, System.EventArgs e)
         {
-            Authtorization.GetAuthorization().login = Login.Text;
+            Authtorization.GetAuthorization().Login = ((TextBox)sender).Text;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
