@@ -46,27 +46,18 @@ namespace PPC
                 return instance;
             }
         }
-        public void Authorization()
+        public Date_Users Authorization()
         {
-            if (login.Length == 0)
-            {
-                MessageBox.Show("Введите значение в поле логина");
-                return;
-            }
-            if (password.Length == 0)
-            {
-                MessageBox.Show("Введите значение в поле пароля");
-                return;
-            }
             using (UserContext db = new UserContext())
             {
                 if (db.Date_Users.Where(a => a.Password == password && a.Login == login).Count() == 0)
                 {
-                    MessageBox.Show("Вход в систему неудачен");
-                    return;
+                    return new Date_Users();
                 }
-                else App.AuthorizationData = (db.Date_Users.Where(a => a.Password == password && a.Login == login).First());
-                MessageBox.Show("Вход выполнен успешно");
+                else
+                {
+                    return db.Date_Users.Where(a => a.Password == password && a.Login == login).First();
+                }
             }
         }
     }

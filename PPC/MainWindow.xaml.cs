@@ -36,7 +36,28 @@ namespace PPC
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Authtorization.GetAuthorization().Authorization();
+            if(Login.Text == "")
+            {
+                MessageBox.Show("Введите значение в поле логина");
+                return;
+            }
+            if(Password.Password == "")
+            {
+                MessageBox.Show("Введите значение в поле пароля");
+                return;
+            }
+            Date_Users User;
+            User = Authtorization.GetAuthorization().Authorization();
+            if(User.Login is null)
+            {
+                MessageBox.Show("Вход в систему неудачен");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Вход выполнен успешно");
+                ///////Код для перехода на следующее окно
+            }
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-
 namespace PPC
 {
     public class UserContext : DbContext
