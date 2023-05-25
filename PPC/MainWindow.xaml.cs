@@ -78,9 +78,7 @@ namespace PPC
         }
         private void Login_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            MessageBox.Show(textBox.Text);
-            //Authtorization.GetAuthorization().login = Login.Text;
+            Authtorization.GetAuthorization().login = Login.Text;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -10,7 +10,7 @@
         <Style x:Key="FontForTextBlockOnLoginAndPassword"
                TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Abel [RUS by Daymarius]"/>
-            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontSize" Value="40"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Regular"/>
         </Style>
@@ -20,9 +20,24 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Kadwa"/>
         </Style>
+        <Style x:Key="FontForInputLogin"
+               TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Abel [RUS by Daymarius]"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+        </Style>
+        <Style x:Key="FontForInputPassword"
+               TargetType="ScrollViewer">
+            <Setter Property="FontFamily" Value="Abel [RUS by Daymarius]"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+        </Style>
         <Style x:Key="StyleForLoginBox"
                TargetType="TextBox">
             <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="600"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Text" Value=""/>
@@ -33,6 +48,36 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="30">
+                            <TextBox Text ="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                Mode=OneWayToSource,
+                                Path=Text}"
+                                     Background="#0000"
+                                     Padding="30,0,30,0"
+                                     BorderThickness="0"
+                                     CaretBrush="Black"
+                                     Style="{StaticResource FontForInputLogin}"
+                                     VerticalContentAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="StyleForPasswordBox" TargetType="PasswordBox">
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="600"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Padding" Value="30,0,30,0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="VerticalContentAlignment" Value = "Center"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="30">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -77,8 +122,8 @@
             <StackPanel Width="600px">
                 <TextBlock Text="Логин" Foreground="Black" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
                 <TextBox x:Name="Login" Style="{StaticResource StyleForLoginBox}"></TextBox>
-                <TextBlock Text="Пароль" Foreground="Black" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
-                <PasswordBox x:Name="Password"></PasswordBox>
+                <TextBlock Text="Пароль" Foreground="Black" Margin="0,30,0,0" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
+                <PasswordBox x:Name="Password" Style="{StaticResource StyleForPasswordBox}"></PasswordBox>
             </StackPanel>
             <Button Style="{StaticResource StyleForAuthButton}" Click="Button_Click"/>
         </StackPanel>
