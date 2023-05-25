@@ -18,8 +18,23 @@ namespace PPC
         public string Password { get; set; }
         public Nullable<int> ID_user { get; set; }
         public Nullable<int> ID_role { get; set; }
-    
         public virtual Role Role { get; set; }
         public virtual Users Users { get; set; }
+        public static bool operator ==(Date_Users User1, Date_Users User2)
+        {
+            if(User1.Login == User2.Login
+                && User1.Password == User2.Password
+                && User1.ID_user == User2.ID_user
+                && User1.ID_role == User2.ID_role) return true;
+            else return false;
+        }
+        public static bool operator !=(Date_Users User1, Date_Users User2)
+        {
+            if (User1.Login == User2.Login
+                && User1.Password == User2.Password
+                && User1.ID_user == User2.ID_user
+                && User1.ID_role == User2.ID_role) return true;
+            else return false;
+        }
     }
 }
