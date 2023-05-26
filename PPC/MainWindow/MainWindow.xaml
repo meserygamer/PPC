@@ -109,11 +109,11 @@
             <Image Source="/Images/MainIcon.jpg" Width="450" Height="435" Margin="0 32 0 13"></Image>
             <StackPanel Width="600px">
                 <TextBlock Text="Логин" Foreground="Black" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
-                <TextBox x:Name="Login" Style="{StaticResource StyleForLoginBox}"></TextBox>
+                <TextBox x:Name="Login" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StyleForLoginBox}"></TextBox>
                 <TextBlock Text="Пароль" Foreground="Black" Margin="0,30,0,0" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
                 <PasswordBox x:Name="Password" Style="{StaticResource StyleForPasswordBox}"></PasswordBox>
             </StackPanel>
-            <Button Style="{StaticResource StyleForAuthButton}" Click="Button_Click"/>
+            <Button Command="{Binding Auth}" Style="{StaticResource StyleForAuthButton}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="43b4e41c33a94cb382fb0df831f6af5d" Name="Diagram1">
+        <EntityTypeShape EntityType="TheBestV2Model.Authorization_History" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Date_task" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Date_Users" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Role" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Status" Width="1.5" PointX="1.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Task" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Users" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Active_tasks" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheBestV2Model.Complete_tasks" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="TheBestV2Model.FK__Authoriza__ID_Us__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="TheBestV2Model.FK__Date_task__ID_st__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TheBestV2Model.FK__Task__ID_task__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="TheBestV2Model.FK__Date_User__ID_ro__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="TheBestV2Model.FK__Date_User__ID_us__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="TheBestV2Model.FK__Task__ID_user__44FF419A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

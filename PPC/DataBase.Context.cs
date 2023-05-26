@@ -15,10 +15,10 @@ namespace PPC
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TheBestEntities : DbContext
+    public partial class TheBestV2Entities : DbContext
     {
-        public TheBestEntities()
-            : base("name=TheBestEntities")
+        public TheBestV2Entities()
+            : base("name=TheBestV2Entities")
         {
         }
     
@@ -27,6 +27,7 @@ namespace PPC
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Authorization_History> Authorization_History { get; set; }
         public virtual DbSet<Date_task> Date_task { get; set; }
         public virtual DbSet<Date_Users> Date_Users { get; set; }
         public virtual DbSet<Role> Role { get; set; }
@@ -34,6 +35,8 @@ namespace PPC
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Active_tasks> Active_tasks { get; set; }
+        public virtual DbSet<Complete_tasks> Complete_tasks { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

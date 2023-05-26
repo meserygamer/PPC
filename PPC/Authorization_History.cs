@@ -12,14 +12,12 @@ namespace PPC
     using System;
     using System.Collections.Generic;
     
-    public partial class Date_Users
+    public partial class Authorization_History
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> ID_user { get; set; }
-        public Nullable<int> ID_role { get; set; }
+        public int ID_Auth { get; set; }
+        public int ID_User { get; set; }
+        public System.DateTime Time_Auth { get; set; }
     
-        public virtual Role Role { get; set; }
         public virtual Users Users { get; set; }
     }
 }

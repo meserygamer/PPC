@@ -12,14 +12,12 @@ namespace PPC
     using System;
     using System.Collections.Generic;
     
-    public partial class Date_Users
+    public partial class Active_tasks
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> ID_user { get; set; }
-        public Nullable<int> ID_role { get; set; }
-    
-        public virtual Role Role { get; set; }
-        public virtual Users Users { get; set; }
+        public int ID_task { get; set; }
+        public string Name_tasks { get; set; }
+        public string Description_task { get; set; }
+        public Nullable<System.DateTime> Date_start_job { get; set; }
+        public Nullable<System.DateTime> Date_finish_job { get; set; }
     }
 }

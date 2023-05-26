@@ -4,12 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище TheBestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище TheBestV2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authorization_History">
+          <Key>
+            <PropertyRef Name="ID_Auth" />
+          </Key>
+          <Property Name="ID_Auth" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="Time_Auth" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Date_task">
           <Key>
             <PropertyRef Name="ID_task" />
           </Key>
-          <Property Name="ID_task" Type="int" Nullable="false" />
+          <Property Name="ID_task" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name_task" Type="varchar" MaxLength="255" />
           <Property Name="Description_task" Type="varchar" MaxLength="255" />
           <Property Name="Date_start_job" Type="date" />
@@ -29,14 +37,14 @@
           <Key>
             <PropertyRef Name="ID_role" />
           </Key>
-          <Property Name="ID_role" Type="int" Nullable="false" />
+          <Property Name="ID_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name_role" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="ID_status" />
           </Key>
-          <Property Name="ID_status" Type="int" Nullable="false" />
+          <Property Name="ID_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -53,7 +61,7 @@
           <Key>
             <PropertyRef Name="ID_Task_For_User" />
           </Key>
-          <Property Name="ID_Task_For_User" Type="int" Nullable="false" />
+          <Property Name="ID_Task_For_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_task" Type="int" />
           <Property Name="ID_user" Type="int" />
         </EntityType>
@@ -61,13 +69,49 @@
           <Key>
             <PropertyRef Name="ID_user" />
           </Key>
-          <Property Name="ID_user" Type="int" Nullable="false" />
+          <Property Name="ID_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="255" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
           <Property Name="Patronymic" Type="varchar" MaxLength="255" />
           <Property Name="Phone" Type="varchar" MaxLength="255" />
           <Property Name="Email" Type="varchar" MaxLength="255" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TheBestV2.dbo.Active_tasks" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Active_tasks">
+          <Key>
+            <PropertyRef Name="ID_task" />
+          </Key>
+          <Property Name="ID_task" Type="int" Nullable="false" />
+          <Property Name="Name_tasks" Type="varchar" MaxLength="255" />
+          <Property Name="Description_task" Type="varchar" MaxLength="255" />
+          <Property Name="Date_start_job" Type="date" />
+          <Property Name="Date_finish_job" Type="date" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TheBestV2.dbo.Complete_tasks" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Complete_tasks">
+          <Key>
+            <PropertyRef Name="ID_task" />
+          </Key>
+          <Property Name="ID_task" Type="int" Nullable="false" />
+          <Property Name="Name_tasks" Type="varchar" MaxLength="255" />
+          <Property Name="Description_task" Type="varchar" MaxLength="255" />
+          <Property Name="Date_start_job" Type="date" />
+          <Property Name="Date_finish_job" Type="date" />
+        </EntityType>
+        <Association Name="FK__Authoriza__ID_Us__47DBAE45">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Authorization_History" Type="Self.Authorization_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID_user" />
+            </Principal>
+            <Dependent Role="Authorization_History">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Date_task__ID_st__412EB0B6">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="Date_task" Type="Self.Date_task" Multiplicity="*" />
@@ -159,7 +203,8 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="Хранилище TheBestModelContainer">
+        <EntityContainer Name="Хранилище TheBestV2ModelContainer">
+          <EntitySet Name="Authorization_History" EntityType="Self.Authorization_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Date_task" EntityType="Self.Date_task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Date_Users" EntityType="Self.Date_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -167,6 +212,28 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Active_tasks" EntityType="Self.Active_tasks" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Active_tasks].[ID_task] AS [ID_task], 
+    [Active_tasks].[Name_tasks] AS [Name_tasks], 
+    [Active_tasks].[Description_task] AS [Description_task], 
+    [Active_tasks].[Date_start_job] AS [Date_start_job], 
+    [Active_tasks].[Date_finish_job] AS [Date_finish_job]
+    FROM [dbo].[Active_tasks] AS [Active_tasks]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Complete_tasks" EntityType="Self.Complete_tasks" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Complete_tasks].[ID_task] AS [ID_task], 
+    [Complete_tasks].[Name_tasks] AS [Name_tasks], 
+    [Complete_tasks].[Description_task] AS [Description_task], 
+    [Complete_tasks].[Date_start_job] AS [Date_start_job], 
+    [Complete_tasks].[Date_finish_job] AS [Date_finish_job]
+    FROM [dbo].[Complete_tasks] AS [Complete_tasks]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Authoriza__ID_Us__47DBAE45" Association="Self.FK__Authoriza__ID_Us__47DBAE45">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Authorization_History" EntitySet="Authorization_History" />
+          </AssociationSet>
           <AssociationSet Name="FK__Date_task__ID_st__412EB0B6" Association="Self.FK__Date_task__ID_st__412EB0B6">
             <End Role="Status" EntitySet="Status" />
             <End Role="Date_task" EntitySet="Date_task" />
@@ -192,12 +259,21 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TheBestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TheBestV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Authorization_History">
+          <Key>
+            <PropertyRef Name="ID_Auth" />
+          </Key>
+          <Property Name="ID_Auth" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="Time_Auth" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Authoriza__ID_Us__47DBAE45" FromRole="Authorization_History" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Date_task">
           <Key>
             <PropertyRef Name="ID_task" />
           </Key>
-          <Property Name="ID_task" Type="Int32" Nullable="false" />
+          <Property Name="ID_task" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name_task" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Description_task" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Date_start_job" Type="DateTime" Precision="0" />
@@ -221,7 +297,7 @@
           <Key>
             <PropertyRef Name="ID_role" />
           </Key>
-          <Property Name="ID_role" Type="Int32" Nullable="false" />
+          <Property Name="ID_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name_role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Date_Users" Relationship="Self.FK__Date_User__ID_ro__3C69FB99" FromRole="Role" ToRole="Date_Users" />
         </EntityType>
@@ -229,7 +305,7 @@
           <Key>
             <PropertyRef Name="ID_status" />
           </Key>
-          <Property Name="ID_status" Type="Int32" Nullable="false" />
+          <Property Name="ID_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Date_task" Relationship="Self.FK__Date_task__ID_st__412EB0B6" FromRole="Status" ToRole="Date_task" />
         </EntityType>
@@ -247,7 +323,7 @@
           <Key>
             <PropertyRef Name="ID_Task_For_User" />
           </Key>
-          <Property Name="ID_Task_For_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_Task_For_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_task" Type="Int32" />
           <Property Name="ID_user" Type="Int32" />
           <NavigationProperty Name="Date_task" Relationship="Self.FK__Task__ID_task__440B1D61" FromRole="Task" ToRole="Date_task" />
@@ -257,15 +333,48 @@
           <Key>
             <PropertyRef Name="ID_user" />
           </Key>
-          <Property Name="ID_user" Type="Int32" Nullable="false" />
+          <Property Name="ID_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Authorization_History" Relationship="Self.FK__Authoriza__ID_Us__47DBAE45" FromRole="Users" ToRole="Authorization_History" />
           <NavigationProperty Name="Date_Users" Relationship="Self.FK__Date_User__ID_us__3B75D760" FromRole="Users" ToRole="Date_Users" />
           <NavigationProperty Name="Task" Relationship="Self.FK__Task__ID_user__44FF419A" FromRole="Users" ToRole="Task" />
         </EntityType>
+        <EntityType Name="Active_tasks">
+          <Key>
+            <PropertyRef Name="ID_task" />
+          </Key>
+          <Property Name="ID_task" Type="Int32" Nullable="false" />
+          <Property Name="Name_tasks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description_task" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date_start_job" Type="DateTime" Precision="0" />
+          <Property Name="Date_finish_job" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Complete_tasks">
+          <Key>
+            <PropertyRef Name="ID_task" />
+          </Key>
+          <Property Name="ID_task" Type="Int32" Nullable="false" />
+          <Property Name="Name_tasks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description_task" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date_start_job" Type="DateTime" Precision="0" />
+          <Property Name="Date_finish_job" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK__Authoriza__ID_Us__47DBAE45">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Authorization_History" Type="Self.Authorization_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID_user" />
+            </Principal>
+            <Dependent Role="Authorization_History">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Date_task__ID_st__412EB0B6">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="Date_task" Type="Self.Date_task" Multiplicity="*" />
@@ -326,7 +435,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TheBestEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TheBestV2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authorization_History" EntityType="Self.Authorization_History" />
           <EntitySet Name="Date_task" EntityType="Self.Date_task" />
           <EntitySet Name="Date_Users" EntityType="Self.Date_Users" />
           <EntitySet Name="Role" EntityType="Self.Role" />
@@ -334,6 +444,12 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Task" EntityType="Self.Task" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Active_tasks" EntityType="Self.Active_tasks" />
+          <EntitySet Name="Complete_tasks" EntityType="Self.Complete_tasks" />
+          <AssociationSet Name="FK__Authoriza__ID_Us__47DBAE45" Association="Self.FK__Authoriza__ID_Us__47DBAE45">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Authorization_History" EntitySet="Authorization_History" />
+          </AssociationSet>
           <AssociationSet Name="FK__Date_task__ID_st__412EB0B6" Association="Self.FK__Date_task__ID_st__412EB0B6">
             <End Role="Status" EntitySet="Status" />
             <End Role="Date_task" EntitySet="Date_task" />
@@ -370,11 +486,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TheBestModel.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TheBestV2Model.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TheBestModel.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TheBestV2Model.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -401,9 +517,18 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище TheBestModelContainer" CdmEntityContainer="TheBestEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TheBestV2ModelContainer" CdmEntityContainer="TheBestV2Entities">
+          <EntitySetMapping Name="Authorization_History">
+            <EntityTypeMapping TypeName="TheBestV2Model.Authorization_History">
+              <MappingFragment StoreEntitySet="Authorization_History">
+                <ScalarProperty Name="ID_Auth" ColumnName="ID_Auth" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Time_Auth" ColumnName="Time_Auth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Date_task">
-            <EntityTypeMapping TypeName="TheBestModel.Date_task">
+            <EntityTypeMapping TypeName="TheBestV2Model.Date_task">
               <MappingFragment StoreEntitySet="Date_task">
                 <ScalarProperty Name="ID_task" ColumnName="ID_task" />
                 <ScalarProperty Name="Name_task" ColumnName="Name_task" />
@@ -415,7 +540,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Date_Users">
-            <EntityTypeMapping TypeName="TheBestModel.Date_Users">
+            <EntityTypeMapping TypeName="TheBestV2Model.Date_Users">
               <MappingFragment StoreEntitySet="Date_Users">
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -425,7 +550,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="TheBestModel.Role">
+            <EntityTypeMapping TypeName="TheBestV2Model.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="ID_role" ColumnName="ID_role" />
                 <ScalarProperty Name="Name_role" ColumnName="Name_role" />
@@ -433,7 +558,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="TheBestModel.Status">
+            <EntityTypeMapping TypeName="TheBestV2Model.Status">
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="ID_status" ColumnName="ID_status" />
                 <ScalarProperty Name="Status1" ColumnName="Status" />
@@ -441,7 +566,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="TheBestModel.sysdiagrams">
+            <EntityTypeMapping TypeName="TheBestV2Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -452,7 +577,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Task">
-            <EntityTypeMapping TypeName="TheBestModel.Task">
+            <EntityTypeMapping TypeName="TheBestV2Model.Task">
               <MappingFragment StoreEntitySet="Task">
                 <ScalarProperty Name="ID_Task_For_User" ColumnName="ID_Task_For_User" />
                 <ScalarProperty Name="ID_task" ColumnName="ID_task" />
@@ -461,7 +586,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TheBestModel.Users">
+            <EntityTypeMapping TypeName="TheBestV2Model.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="ID_user" ColumnName="ID_user" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -472,20 +597,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище TheBestModel.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище TheBestModel.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище TheBestModel.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище TheBestModel.sp_helpdiagramdefinition">
+          <EntitySetMapping Name="Active_tasks">
+            <EntityTypeMapping TypeName="TheBestV2Model.Active_tasks">
+              <MappingFragment StoreEntitySet="Active_tasks">
+                <ScalarProperty Name="ID_task" ColumnName="ID_task" />
+                <ScalarProperty Name="Name_tasks" ColumnName="Name_tasks" />
+                <ScalarProperty Name="Description_task" ColumnName="Description_task" />
+                <ScalarProperty Name="Date_start_job" ColumnName="Date_start_job" />
+                <ScalarProperty Name="Date_finish_job" ColumnName="Date_finish_job" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Complete_tasks">
+            <EntityTypeMapping TypeName="TheBestV2Model.Complete_tasks">
+              <MappingFragment StoreEntitySet="Complete_tasks">
+                <ScalarProperty Name="ID_task" ColumnName="ID_task" />
+                <ScalarProperty Name="Name_tasks" ColumnName="Name_tasks" />
+                <ScalarProperty Name="Description_task" ColumnName="Description_task" />
+                <ScalarProperty Name="Date_start_job" ColumnName="Date_start_job" />
+                <ScalarProperty Name="Date_finish_job" ColumnName="Date_finish_job" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище TheBestV2Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище TheBestV2Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище TheBestV2Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище TheBestV2Model.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TheBestModel.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="TheBestV2Model.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище TheBestModel.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище TheBestV2Model.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TheBestModel.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="TheBestV2Model.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -494,8 +641,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище TheBestModel.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище TheBestModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище TheBestV2Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище TheBestV2Model.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
