@@ -71,6 +71,7 @@
     <Compile Include="Date_Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Registration.cs" />
     <Compile Include="UserContext.cs" />
     <Compile Include="Model1.cs">
       <AutoGen>True</AutoGen>

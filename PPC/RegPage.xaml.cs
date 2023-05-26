@@ -22,6 +22,18 @@ namespace PPC
         public RegPage()
         {
             InitializeComponent();
+            PasswordReg.PasswordChanged += PasswordReg_PasswordChanged;
+            ConfirmPassword.PasswordChanged += PasswordReg_PasswordChanged;
+        }
+        private void PasswordReg_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((PasswordBox)sender).Tag = ((PasswordBox)sender).Password;
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"{((Registration)this.Resources["Reg"]).Login}" +
+                $"\n{((Registration)this.Resources["Reg"]).Password}" +
+                $"\n{((Registration)this.Resources["Reg"]).ConfirmPassword}");
         }
     }
 }

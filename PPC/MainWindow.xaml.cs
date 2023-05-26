@@ -24,19 +24,19 @@ namespace PPC
         {
             InitializeComponent();
             Login.TextChanged += Login_TextChanged;
-            Password.PasswordChanged += Password_PasswordChanged; ;
+            Password.PasswordChanged += Password_PasswordChanged;
         }
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            Authtorization.GetAuthorization().password = Password.Password;
+            //Authtorization.GetAuthorization().password = Password.Password;
         }
         private void Login_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Authtorization.GetAuthorization().login = Login.Text;
+            //Authtorization.GetAuthorization().login = Login.Text;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Authtorization.GetAuthorization().Authorization();
+            //Authtorization.GetAuthorization().Authorization();
         }
     }
 }
