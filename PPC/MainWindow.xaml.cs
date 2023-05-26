@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Auth;
 
 namespace PPC
 {
@@ -28,11 +29,11 @@ namespace PPC
         }
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            Authtorization.GetAuthorization().Password = ((PasswordBox)sender).Password;
+            Authtorization.GetAuthorization().password = ((PasswordBox)sender).Password;
         }
         private void Login_TextChanged(object sender, System.EventArgs e)
         {
-            Authtorization.GetAuthorization().Login = ((TextBox)sender).Text;
+            Authtorization.GetAuthorization().login = ((TextBox)sender).Text;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +48,10 @@ namespace PPC
                 return;
             }
             Date_Users User;
-            User = Authtorization.GetAuthorization().Authorization();
+            using(UserContext context = new UserContext())
+            {
+                User = Authtorization.GetAuthorization().Authorization(context.Date_Users.ToList());
+            }
             if(User.Login is null)
             {
                 MessageBox.Show("Вход в систему неудачен");

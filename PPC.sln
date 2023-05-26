@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC", "PPC\PPC.csproj", "{2106C25B-FB0C-4032-8F35-8E539F080957}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{ACF27838-4EA3-4FDD-9AA9-51D4EC33117C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC", "\main\RDP\33П\ВоробьевКЕ\Desktop\PPC\PPC\PPC.csproj", "{2106C25B-FB0C-4032-8F35-8E539F080957}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{2106C25B-FB0C-4032-8F35-8E539F080957}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2106C25B-FB0C-4032-8F35-8E539F080957}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2106C25B-FB0C-4032-8F35-8E539F080957}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACF27838-4EA3-4FDD-9AA9-51D4EC33117C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACF27838-4EA3-4FDD-9AA9-51D4EC33117C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACF27838-4EA3-4FDD-9AA9-51D4EC33117C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACF27838-4EA3-4FDD-9AA9-51D4EC33117C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

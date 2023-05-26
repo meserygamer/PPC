@@ -12,23 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PPC;
 
-
-namespace PPC
+namespace Auth
 {
     public class Authtorization
     {
         private static Authtorization instance;
-        private string login;
-        private string password;
-        public string Login
-        {
-            set { login = value; }
-        }
-        public string Password
-        {
-            set { password = value; }
-        }
+        public string login;
+        public string password;
         private Authtorization()
         {
             login = "";
@@ -46,19 +38,16 @@ namespace PPC
                 return instance;
             }
         }
-        public Date_Users Authorization()
+        public Date_Users Authorization(List<Date_Users> Data)
         {
-            using (UserContext db = new UserContext())
+            foreach (Date_Users user in Data)
             {
-                if (db.Date_Users.Where(a => a.Password == password && a.Login == login).Count() == 0)
+                if ((user.Login == login) && (user.Password == password))
                 {
-                    return new Date_Users();
-                }
-                else
-                {
-                    return db.Date_Users.Where(a => a.Password == password && a.Login == login).First();
+                    return user;
                 }
             }
+            return new Date_Users();
         }
     }
 }
