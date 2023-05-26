@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Authorization.cs" />
     <Compile Include="Date_task.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
