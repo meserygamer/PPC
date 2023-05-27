@@ -46,7 +46,7 @@ namespace PPC
                 MessageBox.Show("В логине должно быть минимум 4 символа");
                 return;
             }
-            using(UserContext DB = new UserContext())
+            using(TheBestV2Entities DB = new TheBestV2Entities())
             {
                 if(DB.Date_Users.Where(a => a.Login == UserLogin).Count() > 0)
                 {
