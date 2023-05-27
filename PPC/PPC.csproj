@@ -102,7 +102,6 @@
     <Compile Include="PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegistrationWindow\Registration.cs" />
     <Compile Include="RegistrationWindow\RegModel.cs" />
     <Compile Include="RegistrationWindow\RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>

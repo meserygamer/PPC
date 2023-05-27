@@ -34,5 +34,12 @@ namespace PPC
                 ((MainWindowViewModel)this.DataContext).password = ((PasswordBox)sender).Password;
             }
         }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            RegPage RegistrationWindow = new RegPage();
+            RegistrationWindow.Show();
+            this.Close();
+        }
     }
 }
