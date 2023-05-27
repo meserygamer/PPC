@@ -115,7 +115,7 @@
                 <TextBlock Text="Подтверждение пароля" Foreground="Black" Margin="0,30,0,0" Style="{StaticResource FontForTextBlockOnLoginAndPassword}"/>
                 <PasswordBox x:Name="ConfirmPassword" Style="{StaticResource StyleForPasswordBox}"></PasswordBox>
             </StackPanel>
-            <Button Command="{Binding RegistrationCommand}" Style="{StaticResource StyleForAuthButton}" Click="Button_Click"/>
+            <Button Command="{Binding RegistrationCommand}" Style="{StaticResource StyleForAuthButton}"/>
         </StackPanel>
     </Grid>
 </Window>

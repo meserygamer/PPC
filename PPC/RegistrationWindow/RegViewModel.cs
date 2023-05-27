@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 
 namespace PPC
@@ -31,7 +32,25 @@ namespace PPC
                 return registrationCommand ?? (registrationCommand
                     = new RelayCommand(a =>
                     {
-
+                        if(RegModel.CheckLoginInSystem(login)==true)
+                        {
+                            MessageBox.Show("Пользователь с таким логином уже есть в системе");
+                            return;
+                        }
+                        if(CheckPassword_Confirm()==false)
+                        {
+                            return;
+                        }
+                        if(PasswordCheck()==false)
+                        {
+                            return;
+                        }
+                        if(LoginCheck()==false)
+                        {
+                            return;
+                        }
+                        RegModel.AddUser(login, Password);
+                        MessageBox.Show("Вы успешно");
                     }
                     ));
             }
@@ -50,6 +69,51 @@ namespace PPC
         public void OnProperyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+        public bool CheckPassword_Confirm()
+        {
+            if (Password != ConfirmPassword)
+            {
+                MessageBox.Show("Пароли в полях не совпадают");
+                return false;
+            }
+            else return true;
+        }
+        public bool PasswordCheck()
+        {
+            if (!Regex.IsMatch(Password, "^(?=.*[A-Z])(?=.*[0-9])[A-z0-9]{6,}$"))
+            {
+                MessageBox.Show("Пароль не надо такой");
+                return false;
+            }
+            else return true;
+        }
+        public bool LoginCheck() 
+        {
+            if(!Regex.IsMatch(Login, "^[A-z0-9]{4,}$"))
+            {
+                MessageBox.Show("Логин не надо такой");
+                return false;
+            }
+            else return true ;
+        }
+        public bool CheckLoginOnEmpty()
+        {
+            if (login == "" || login == null)
+            {
+                MessageBox.Show("Введите значение в поле логина");
+                return true;
+            }
+            return false;
+        }
+        public bool CheckPasswordOnEmpty()
+        {
+            if (Password == "" || Password == null)
+            {
+                MessageBox.Show("Введите значение в поле пароля");
+                return true;
+            }
+            return false;
         }
     }
     public class RelayCommand : ICommand
