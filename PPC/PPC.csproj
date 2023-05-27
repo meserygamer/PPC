@@ -65,7 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Active_tasks.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+    <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Authorization_History.cs">
       <DependentUpon>DataBase.tt</DependentUpon>

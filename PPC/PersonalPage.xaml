@@ -1,0 +1,24 @@
+﻿<Window x:Class="PPC.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PPC"
+        mc:Ignorable="d"
+        Title="Window1" Height="1024" Width="1440">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#2B2E4A" HorizontalAlignment="Stretch">
+            <TextBlock FontFamily="Abel [RUS by Daymarius]" Height="34" FontSize="36" Foreground="White" Margin="22,22,0,0">Личный кабинет</TextBlock>
+            <TextBlock FontFamily="Abel [RUS by Daymarius]" Height="24" FontSize="20" Foreground="#BEBEBE" Margin="22,10,0,0">Задачи - Личный кабинет</TextBlock>
+            <Button BorderThickness="1" HorizontalContentAlignment="Left" Padding="25" Margin="0,26,0,0" Height="92" Content="Общие данные" Background="White" FontSize="22" FontFamily="Abel [RUS by Daymarius]" BorderBrush="Silver"></Button>
+            <Button BorderThickness="1" HorizontalContentAlignment="Left" Padding="25,0,0,0" Height="92" Content="Аутентификационные данные" Background="White" FontSize="22" FontFamily="Abel [RUS by Daymarius]" BorderBrush="Silver"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
