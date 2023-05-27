@@ -23,7 +23,7 @@ namespace PPC
         private string login;
         public string password {private get; set; }
         private AuthtorizationCommand authtorizationCommand;
-        private Date_Users User;
+        public Date_Users User;
         public AuthtorizationCommand Auth
         {
             get
@@ -55,7 +55,7 @@ namespace PPC
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-        private bool CheckLoginOnEmpty()
+        public bool CheckLoginOnEmpty()
         {
             if(login == "" || login == null)
             {
@@ -64,7 +64,7 @@ namespace PPC
             }
             return false;
         }
-        private bool CheckPasswordOnEmpty()
+        public bool CheckPasswordOnEmpty()
         {
             if(password == "" || password == null)
             {
@@ -73,7 +73,7 @@ namespace PPC
             }
             return false;
         }
-        private bool CheckOnFailAuthorization()
+        public bool CheckOnFailAuthorization()
         {
             if(User is null || User.ID_user is null)
             {
