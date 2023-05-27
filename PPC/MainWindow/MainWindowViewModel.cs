@@ -57,7 +57,7 @@ namespace PPC
         }
         private bool CheckLoginOnEmpty()
         {
-            if(login == "")
+            if(login == "" || login == null)
             {
                 MessageBox.Show("Введите значение в поле логина");
                 return true;
@@ -66,7 +66,7 @@ namespace PPC
         }
         private bool CheckPasswordOnEmpty()
         {
-            if(password == "")
+            if(password == "" || password == null)
             {
                 MessageBox.Show("Введите значение в поле пароля");
                 return true;
