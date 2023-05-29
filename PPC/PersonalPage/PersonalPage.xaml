@@ -20,6 +20,8 @@
             <Button BorderThickness="1" HorizontalContentAlignment="Left" Padding="25" Margin="0,26,0,0" Height="92" Content="Общие данные" Background="White" FontSize="22" FontFamily="Abel [RUS by Daymarius]" BorderBrush="Silver"></Button>
             <Button BorderThickness="1" HorizontalContentAlignment="Left" Padding="25,0,0,0" Height="92" Content="Аутентификационные данные" Background="White" FontSize="22" FontFamily="Abel [RUS by Daymarius]" BorderBrush="Silver"></Button>
         </StackPanel>
-        <Frame x:Name="Options" Grid.Row="0" Grid.Column="1" Content="" Source="/PersonalPage/AuthData.xaml" Margin="50,0,500,0"/>
+        <ContentControl Grid.Row="0" Grid.Column="1" Height="800" VerticalAlignment="Top" Margin="55,115,185,0">
+            <local:Basic></local:Basic>
+        </ContentControl>
     </Grid>
 </Window>

@@ -44,8 +44,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -99,8 +101,8 @@
     </Compile>
     <Compile Include="MainWindow\MainWindowModel.cs" />
     <Compile Include="MainWindow\MainWindowViewModel.cs" />
-    <Compile Include="PersonalPage\BasicData.xaml.cs">
-      <DependentUpon>BasicData.xaml</DependentUpon>
+    <Compile Include="PersonalPage\Basic.xaml.cs">
+      <DependentUpon>Basic.xaml</DependentUpon>
     </Compile>
     <Compile Include="PersonalPage\AuthData.xaml.cs">
       <DependentUpon>AuthData.xaml</DependentUpon>
@@ -142,7 +144,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PersonalPage\BasicData.xaml">
+    <Page Include="PersonalPage\Basic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

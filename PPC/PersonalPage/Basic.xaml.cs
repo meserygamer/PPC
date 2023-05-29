@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PPC
 {
     /// <summary>
-    /// Логика взаимодействия для BasicData.xaml
+    /// Логика взаимодействия для Basic.xaml
     /// </summary>
-    public partial class BasicData : Page
+    public partial class Basic : UserControl
     {
-        public BasicData()
+        public Basic()
         {
             InitializeComponent();
         }
