@@ -99,7 +99,13 @@
     </Compile>
     <Compile Include="MainWindow\MainWindowModel.cs" />
     <Compile Include="MainWindow\MainWindowViewModel.cs" />
-    <Compile Include="PersonalPage.xaml.cs">
+    <Compile Include="PersonalPage\BasicData.xaml.cs">
+      <DependentUpon>BasicData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalPage\AuthData.xaml.cs">
+      <DependentUpon>AuthData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalPage\PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistrationWindow\RegModel.cs" />
@@ -136,7 +142,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PersonalPage.xaml">
+    <Page Include="PersonalPage\BasicData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonalPage\AuthData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonalPage\PersonalPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

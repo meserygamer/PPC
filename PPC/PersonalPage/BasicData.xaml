@@ -1,0 +1,41 @@
+﻿<Page x:Class="PPC.BasicData"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PPC"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BasicData">
+    <Grid Background="White" Margin="0,0,0,-87">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock Margin="50,10,0,0" FontFamily="Abel [RUS by Daymarius]" FontSize="36" Foreground="#FF2B2E4A">Имя</TextBlock>
+            <TextBox Margin="50,5,0,0" Height="35"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <TextBlock Margin="50,0,0,0" FontFamily="Abel [RUS by Daymarius]" FontSize="36" Foreground="#FF2B2E4A">Фамилия</TextBlock>
+            <TextBox Margin="50,5,0,0" Height="35"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <TextBlock Margin="50,0,0,0" FontFamily="Abel [RUS by Daymarius]" FontSize="36" Foreground="#FF2B2E4A">Отчество</TextBlock>
+            <TextBox Margin="50,5,0,0" Height="35"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <TextBlock Margin="50,0,0,0" FontFamily="Abel [RUS by Daymarius]" FontSize="36" Foreground="#FF2B2E4A">Номер телефона</TextBlock>
+            <TextBox Margin="50,5,0,0" Height="35"/>
+        </StackPanel>
+        <Button Background="#FFE84545" Grid.Row="4" Grid.Column="0" Margin="50,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Abel [RUS by Daymarius]" FontSize="20" BorderBrush="Black">
+            Подтвердить данные
+        </Button>
+    </Grid>
+</Page>
