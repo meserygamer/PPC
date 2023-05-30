@@ -10,19 +10,19 @@
         <Style x:Key="Text1">
             <Setter Property="TextBlock.FontFamily" Value="Abel [RUS by Daymarius]"/>
             <Setter Property="TextBlock.FontSize" Value="50"/>
-            <Setter Property="TextBlock.Foreground" Value="white"/>
+            <Setter Property="TextBlock.Foreground" Value="Black"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="Text2">
             <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
             <Setter Property="TextBlock.FontSize" Value="30"/>
-            <Setter Property="TextBlock.Foreground" Value="white"/>
+            <Setter Property="TextBlock.Foreground" Value="Black"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="Text3">
             <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
             <Setter Property="TextBlock.FontSize" Value="22"/>
-            <Setter Property="TextBlock.Foreground" Value="white"/>
+            <Setter Property="TextBlock.Foreground" Value="Black"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
             <Setter Property="TextBlock.Height" Value="70"/>
         </Style>
@@ -62,7 +62,7 @@
                                 <Setter TargetName="border"
                                         Property="Background"
                                         Value="Silver" />
-                            </Trigger>
+                            </Trigger> 
                             <Trigger Property="IsSelected"
                                      Value="True">
                                 <Setter TargetName="border"
@@ -110,12 +110,12 @@
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition Width="2.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Background="#2B2E4A" Margin="15,10,15,10">
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="White" Margin="15,10,15,10">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Avatarka.jpg" Height="100" Width="100" Margin="10"/>
                 <TextBlock  Style="{StaticResource Text1}">Кабинет</TextBlock>
             </StackPanel>
-            <Line X1="800" Y1="0" X2="0" Y2="0" Stroke="white" StrokeThickness="7"></Line>
+            <Line X1="800" Y1="0" X2="0" Y2="0" Stroke="#2B2E4A" StrokeThickness="7"></Line>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock  Style="{StaticResource Text1}">Задачи</TextBlock>
             </StackPanel>
@@ -168,7 +168,7 @@
             </StackPanel>
             <ScrollViewer HorizontalScrollBarVisibility ="Disabled" CanContentScroll="True" VerticalScrollBarVisibility ="Hidden" Height="630">
                 <StackPanel Margin="10">
-                    <TextBlock Style="{StaticResource Text4}" TextWrapping="WrapWithOverflow" Text="{Binding Description_task, UpdateSourceTrigger=PropertyChanged}" Height="auto"/>
+                    <TextBlock  Style="{StaticResource Text4}" TextWrapping="WrapWithOverflow" Text="{Binding Description_task, UpdateSourceTrigger=PropertyChanged}" Height="auto"/>
                 </StackPanel>
             </ScrollViewer>
             <Button x:Name="but_complete" Style="{StaticResource but1}" Click="complete_task">Выполнено</Button>
