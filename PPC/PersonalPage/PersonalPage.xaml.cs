@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PPC
+namespace PPC.PersonalPage
 {
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class PersonalPage : Window
     {
-        public Window1()
+        public PersonalPage()
         {
             InitializeComponent();
             this.DataContext = new PersonalPageViewModel();

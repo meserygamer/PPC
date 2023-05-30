@@ -13,15 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PPC
+namespace PPC.PersonalPage
 {
     /// <summary>
     /// Логика взаимодействия для AuthData1.xaml
     /// </summary>
-    public partial class AuthData1 : UserControl
+    public partial class AuthData : UserControl
     {
 
-        public AuthData1()
+        public AuthData()
         {
             InitializeComponent();
             DataContext = new AuthDataViewModel();
