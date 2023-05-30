@@ -143,6 +143,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WindowTasks\WindowTasks.xaml.cs">
+      <DependentUpon>WindowTasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowTasks\WindowTasksModel.cs" />
+    <Compile Include="WindowTasks\WindowTasksViewModel.cs" />
     <Page Include="MainWindow\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +165,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistrationWindow\RegPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WindowTasks\WindowTasks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
