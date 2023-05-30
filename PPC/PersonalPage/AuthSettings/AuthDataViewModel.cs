@@ -62,5 +62,9 @@ namespace PPC
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        public bool EmailCheck()
+        {
+            
+        }
     }
 }
