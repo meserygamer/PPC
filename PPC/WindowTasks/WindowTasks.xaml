@@ -8,26 +8,26 @@
         Title="WindowTasks" Height="1080" Width="1450">
     <Window.Resources> 
         <Style x:Key="Text1">
-            <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
+            <Setter Property="TextBlock.FontFamily" Value="Abel [RUS by Daymarius]"/>
             <Setter Property="TextBlock.FontSize" Value="50"/>
-            <Setter Property="TextBlock.Foreground" Value="Black"/>
+            <Setter Property="TextBlock.Foreground" Value="white"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="Text2">
             <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
             <Setter Property="TextBlock.FontSize" Value="30"/>
-            <Setter Property="TextBlock.Foreground" Value="Black"/>
+            <Setter Property="TextBlock.Foreground" Value="white"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="Text3">
             <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
             <Setter Property="TextBlock.FontSize" Value="22"/>
-            <Setter Property="TextBlock.Foreground" Value="Black"/>
+            <Setter Property="TextBlock.Foreground" Value="white"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
             <Setter Property="TextBlock.Height" Value="70"/>
         </Style>
         <Style x:Key="Text4">
-            <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
+            <Setter Property="TextBlock.FontFamily" Value="Abel [RUS by Daymarius]"/>
             <Setter Property="TextBlock.FontSize" Value="36"/>
             <Setter Property="TextBlock.Foreground" Value="Black"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
@@ -35,7 +35,7 @@
             <Setter Property="TextBlock.Margin" Value="10"/>
         </Style>
         <Style x:Key="Text5">
-            <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
+            <Setter Property="TextBlock.FontFamily" Value="Abel [RUS by Daymarius]"/>
             <Setter Property="TextBlock.FontSize" Value="22"/>
             <Setter Property="TextBlock.Foreground" Value="Black"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>            
@@ -48,7 +48,7 @@
                             <Grid>
                                 <Grid>
                                     <Border x:Name="border" 
-                                            Background="#D9D9D9"/>
+                                            Background="Silver"/>
                                 </Grid>
                                 <ContentPresenter ContentSource="Header"
                                                       HorizontalAlignment="Center"
@@ -61,13 +61,13 @@
                                      Value="True">
                                 <Setter TargetName="border"
                                         Property="Background"
-                                        Value="#D9D9D9" />
+                                        Value="Silver" />
                             </Trigger>
                             <Trigger Property="IsSelected"
                                      Value="True">
                                 <Setter TargetName="border"
-                                        Property="Background"
-                                        Value="#F88D8D" />
+                                        Property="Background"                                        
+                                        Value="#E84545" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -76,7 +76,7 @@
         </Style>
         <Style x:Key="but1" TargetType="Button">
             <Setter Property="Margin" Value="10"/>
-            <Setter Property="Background" Value="#F88D8D"/>
+            <Setter Property="Background" Value="#E84545"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
@@ -94,10 +94,10 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E84545"/>
+                    <Setter Property="Background" Value="#F88D8D"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#F88D8D"/>
+                    <Setter Property="Background" Value="#E84545"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -110,27 +110,27 @@
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition Width="2.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Background="White" Margin="15,10,15,10">
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="#2B2E4A" Margin="15,10,15,10">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Avatarka.jpg" Height="100" Width="100" Margin="10"/>
                 <TextBlock  Style="{StaticResource Text1}">Кабинет</TextBlock>
             </StackPanel>
-            <Line X1="800" Y1="0" X2="0" Y2="0" Stroke="#2B2E4A" StrokeThickness="7"></Line>
+            <Line X1="800" Y1="0" X2="0" Y2="0" Stroke="white" StrokeThickness="7"></Line>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock  Style="{StaticResource Text1}">Задачи</TextBlock>
             </StackPanel>
-            <TabControl x:Name="ListTab" TabStripPlacement="Bottom" SelectionChanged="ClicToTab">
-                <TabItem Header="Активные" x:Name="tabActive"  Width="250" Height="40">
-                    <ScrollViewer HorizontalScrollBarVisibility ="Disabled" CanContentScroll="True" Height="700" Margin="0 5 5 10">
-                        <ListBox ItemsSource="{Binding Active_task}" SelectedItem="{Binding SelectedTask}" Height="auto">
+            <TabControl Margin="0" x:Name="ListTab" TabStripPlacement="Bottom" SelectionChanged="ClicToTab">
+                <TabItem Header="Активные" x:Name="tabActive"  Width="250" Height="40" Margin="0">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Height="700" Margin="0 5 5 10">
+                        <ListBox BorderThickness="0" ItemsSource="{Binding Active_task}" SelectedItem="{Binding SelectedTask}" Width="auto" Height="auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical" Width="500">
+                                    <StackPanel  Orientation="Vertical" Width="650">
                                         <StackPanel Orientation="Horizontal" Height="50" Margin="10">
                                             <Ellipse Fill="#E84545" Width="16" Height="16"></Ellipse>
                                             <TextBlock Style="{StaticResource Text2}" TextTrimming="CharacterEllipsis" Text="{Binding Path=Name_task}" Margin="12 0 0 0"/>
                                         </StackPanel>
-                                        <TextBlock Style="{StaticResource Text3}" TextWrapping="Wrap" MaxHeight="50" Margin="10 0 0 0" Text="{Binding Path=Description_task}"/>
+                                        <TextBlock Style="{StaticResource Text3}" TextWrapping="Wrap" MaxHeight="60" Margin="10 0 0 0" Text="{Binding Path=Description_task}"/>
                                     </StackPanel>  
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -138,8 +138,8 @@
                     </ScrollViewer> 
                 </TabItem>
                 <TabItem x:Name="tabComplete" Header="Завершенные" Width="250" Height="40" >
-                    <ScrollViewer HorizontalScrollBarVisibility ="Disabled" CanContentScroll="True"  Height="700"  Margin="0 5 5 10">
-                        <ListBox ItemsSource="{Binding Complete_task}" SelectedItem="{Binding SelectedTask}" Height="auto">
+                    <ScrollViewer HorizontalScrollBarVisibility ="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="True"  Height="700"  Margin="0 5 5 10">
+                        <ListBox Background="#2B2E4A" ItemsSource="{Binding Complete_task}" SelectedItem="{Binding SelectedTask}" Margin="0" Width="auto" Height="auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
@@ -157,7 +157,7 @@
             </TabControl>
         </StackPanel>
         <StackPanel DataContext="{Binding SelectedTask}" Grid.Row="0" Grid.Column="1" Background="White" Margin="10">
-            <TextBlock Style="{StaticResource Text1}" Text="{Binding Name_task, UpdateSourceTrigger=PropertyChanged}" Margin="10 15 0 20"/>
+            <TextBlock Style="{StaticResource Text1}" Text="{Binding Name_task, UpdateSourceTrigger=PropertyChanged}" Margin="10 15 0 20" Foreground="Black"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource Text4}" Width="365">Дата начала</TextBlock>
                 <TextBlock Style="{StaticResource Text4}" Text="{Binding Date_start_job, UpdateSourceTrigger=PropertyChanged}"/>
