@@ -68,7 +68,8 @@
                     Style="{StaticResource AuthDataButton}"/>
         </StackPanel>
         <ContentControl Grid.Row="0" Grid.Column="1" Height="800" VerticalAlignment="Top" Margin="55,115,185,0">
-            <local:Basic></local:Basic>
+            <!--<local:Basic></local:Basic>-->
+            <local:AuthData1></local:AuthData1>
         </ContentControl>
     </Grid>
 </Window>
