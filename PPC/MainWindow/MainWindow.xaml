@@ -114,6 +114,7 @@
                 <PasswordBox x:Name="Password" Style="{StaticResource StyleForPasswordBox}"></PasswordBox>
             </StackPanel>
             <Button Command="{Binding Auth}" Style="{StaticResource StyleForAuthButton}"/>
+            <TextBlock Margin="15" FontSize="20" TextAlignment="Center"><Hyperlink NavigateUri="" RequestNavigate="Hyperlink_RequestNavigate">У вас нет аккаунта?</Hyperlink></TextBlock>
         </StackPanel>
     </Grid>
 </Window>

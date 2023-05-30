@@ -44,8 +44,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -99,13 +101,20 @@
     </Compile>
     <Compile Include="MainWindow\MainWindowModel.cs" />
     <Compile Include="MainWindow\MainWindowViewModel.cs" />
-    <Compile Include="PersonalPage.xaml.cs">
+    <Compile Include="PersonalPage\Basic.xaml.cs">
+      <DependentUpon>Basic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalPage\AuthData.xaml.cs">
+      <DependentUpon>AuthData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalPage\PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Registration.cs" />
-    <Compile Include="RegPage.xaml.cs">
+    <Compile Include="RegistrationWindow\RegModel.cs" />
+    <Compile Include="RegistrationWindow\RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegistrationWindow\RegViewModel.cs" />
     <Compile Include="Role.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -135,11 +144,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PersonalPage.xaml">
+    <Page Include="PersonalPage\Basic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonalPage\AuthData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonalPage\PersonalPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="RegPage.xaml">
+    <Page Include="RegistrationWindow\RegPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
