@@ -4,6 +4,21 @@
              xmlns:local="clr-namespace:PPC"
              StartupUri="PersonalPage/PersonalPage.xaml">
     <Application.Resources>
-         
+        <local:Date_Users x:Key="UserData"
+                          ID_role="0" ID_user="0"
+                          Login="TestLogin"
+                          Password="TestPassword">
+            <local:Date_Users.Role>
+                <local:Role Name_role="TestRole"/>
+            </local:Date_Users.Role>
+            <local:Date_Users.Users>
+                <local:Users Email="Test@gmail.com"
+                             Name="Иван"
+                             Patronymic="Иванович"
+                             Surname="Иванов"
+                             Phone="88005553535"
+                             ID_user="0"/>
+            </local:Date_Users.Users>
+        </local:Date_Users>
     </Application.Resources>
 </Application>

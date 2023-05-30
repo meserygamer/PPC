@@ -10,19 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PPC
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Логика взаимодействия для Basic.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Basic : UserControl
     {
-        public Window1()
+        public Basic()
         {
             InitializeComponent();
-            this.DataContext = new PersonalPageViewModel();
+            this.DataContext = new BasicViewModel();
         }
     }
 }

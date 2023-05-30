@@ -101,15 +101,18 @@
     </Compile>
     <Compile Include="MainWindow\MainWindowModel.cs" />
     <Compile Include="MainWindow\MainWindowViewModel.cs" />
-    <Compile Include="PersonalPage\Basic.xaml.cs">
+    <Compile Include="PersonalPage\BasicSettings\Basic.xaml.cs">
       <DependentUpon>Basic.xaml</DependentUpon>
     </Compile>
     <Compile Include="PersonalPage\AuthData.xaml.cs">
       <DependentUpon>AuthData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PersonalPage\BasicSettings\BasicViewModel.cs" />
     <Compile Include="PersonalPage\PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PersonalPage\PersonalPageModel.cs" />
+    <Compile Include="PersonalPage\PersonalPageViewModel.cs" />
     <Compile Include="RegistrationWindow\RegModel.cs" />
     <Compile Include="RegistrationWindow\RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>
@@ -144,7 +147,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PersonalPage\Basic.xaml">
+    <Page Include="PersonalPage\BasicSettings\Basic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

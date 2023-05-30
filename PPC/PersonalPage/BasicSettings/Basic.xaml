@@ -71,19 +71,19 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Фамилия</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Surname}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Имя</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Name}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Отчество</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Patronymic}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Телефон</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Phone}"/>
         </StackPanel>
         <Button Grid.Column="0"
                 Grid.Row="4"

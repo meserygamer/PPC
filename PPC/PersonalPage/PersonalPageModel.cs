@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,14 +17,12 @@ using System.Windows.Shapes;
 
 namespace PPC
 {
-    /// <summary>
-    /// Логика взаимодействия для Basic.xaml
-    /// </summary>
-    public partial class Basic : UserControl
+    public enum TabOfSettings
     {
-        public Basic()
-        {
-            InitializeComponent();
-        }
+        BasicSettings,
+        AuthSettings
+    }
+    public class PersonalPageModel
+    {
     }
 }
