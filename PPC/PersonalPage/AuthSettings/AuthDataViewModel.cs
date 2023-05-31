@@ -17,11 +17,12 @@ using System.Windows.Shapes;
 
 namespace PPC.PersonalPage
 {
-    internal class AuthDataViewModel : INotifyPropertyChanged
+    internal class AuthDataViewModel : DependencyObject, INotifyPropertyChanged
     {
         #region Поля
         private string _email;
-        private string _confirmEmail;
+        //private string _confirmEmail;
+        public static readonly DependencyProperty ConfirmEmailProperty;
         private string _oldPass;
         private string _newpass;
         private StateSettings _stateOfSettings;
@@ -56,6 +57,17 @@ namespace PPC.PersonalPage
                 _newpass = value;
                 OnProperyChanged("Newpass");
                 StateOfSettings = StateSettings.SettingsChanged;
+            }
+        }
+        public string ConfirmEmail
+        { 
+            get
+            {
+                return (string)GetValue(ConfirmEmailProperty);
+            }
+            set
+            {
+                SetValue(ConfirmEmailProperty, value);
             }
         }
         public StateSettings StateOfSettings
@@ -100,10 +112,13 @@ namespace PPC.PersonalPage
             }
         }
         #endregion
+        static AuthDataViewModel()
+        {
+            ConfirmEmailProperty = DependencyProperty.Register("ConfirmEmail", typeof(string), typeof(AuthDataViewModel));
+        }
         public AuthDataViewModel()
         {
             Email = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
-            _confirmEmail = Email;
             StateOfSettings = StateSettings.SettingsNotChanged;
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -113,8 +128,8 @@ namespace PPC.PersonalPage
         }
         public void ReturnFieldsDataToConfirmState()
         {
-            _confirmEmail = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
-            Email = _confirmEmail;
+            ConfirmEmail = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
+            Email = ConfirmEmail;
             Oldpass = "";
             Newpass = "";
             StateOfSettings = StateSettings.SettingsNotChanged;
