@@ -112,8 +112,15 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Background="White" Margin="15,10,15,10">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/Images/Avatarka.jpg" Height="100" Width="100" Margin="10"/>
-                <TextBlock  Style="{StaticResource Text1}">Кабинет</TextBlock>
+                <Image Source="/WindowTasks/Avatarka.png" Height="100" Width="100" Margin="10"/>
+                <TextBlock Style="{StaticResource Text1}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="Name" />
+                            <Binding Path="Surname" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
             </StackPanel>
             <Line X1="800" Y1="0" X2="0" Y2="0" Stroke="#2B2E4A" StrokeThickness="7"></Line>
             <StackPanel Orientation="Horizontal" Margin="10">
@@ -139,7 +146,7 @@
                 </TabItem>
                 <TabItem x:Name="tabComplete" Header="Завершенные" Width="250" Height="40" >
                     <ScrollViewer HorizontalScrollBarVisibility ="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="True"  Height="700"  Margin="0 5 5 10">
-                        <ListBox Background="#2B2E4A" ItemsSource="{Binding Complete_task}" SelectedItem="{Binding SelectedTask}" Margin="0" Width="auto" Height="auto">
+                        <ListBox BorderThickness="0" ItemsSource="{Binding Complete_task}" SelectedItem="{Binding SelectedTask}" Margin="0" Width="auto" Height="auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
@@ -166,11 +173,13 @@
                 <TextBlock Style="{StaticResource Text4}"  Width="365">Дата окончания</TextBlock>
                 <TextBlock Style="{StaticResource Text4}" Text="{Binding Date_finish_job, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <ScrollViewer HorizontalScrollBarVisibility ="Disabled" CanContentScroll="True" VerticalScrollBarVisibility ="Hidden" Height="630">
-                <StackPanel Margin="10">
-                    <TextBlock  Style="{StaticResource Text4}" TextWrapping="WrapWithOverflow" Text="{Binding Description_task, UpdateSourceTrigger=PropertyChanged}" Height="auto"/>
-                </StackPanel>
-            </ScrollViewer>
+            <Border Margin="10 0 10 0" BorderBrush="Silver" BorderThickness="1" CornerRadius="8,8,3,3">
+                <ScrollViewer HorizontalScrollBarVisibility ="Disabled" CanContentScroll="True" VerticalScrollBarVisibility ="Hidden" Height="630">
+                    <StackPanel Margin="10">
+                        <TextBlock  Style="{StaticResource Text4}" TextWrapping="WrapWithOverflow" Text="{Binding Description_task, UpdateSourceTrigger=PropertyChanged}" Height="auto"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
             <Button x:Name="but_complete" Style="{StaticResource but1}" Click="complete_task">Выполнено</Button>
         </StackPanel>
     </Grid>

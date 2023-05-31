@@ -24,11 +24,23 @@ namespace PPC
         {
             InitializeComponent();
 
-            DataContext = new WindowTasksViewModel();
+            WindowTasksViewModel viewModel = new WindowTasksViewModel();
+            DataContext = viewModel;
+            Binding nameToStatic = new Binding();
+            Binding surnameToStatic = new Binding();
+            nameToStatic.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
+            surnameToStatic.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
+            nameToStatic.Path = new PropertyPath("Name");
+            surnameToStatic.Path = new PropertyPath("Surname");
+            nameToStatic.Mode = BindingMode.TwoWay;
+            surnameToStatic.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(viewModel, WindowTasksViewModel.NameProperty, nameToStatic);
+            BindingOperations.SetBinding(viewModel, WindowTasksViewModel.SurnameProperty, surnameToStatic);
+            
         }
         private void complete_task(object sender, RoutedEventArgs e)
         {
-
+           
             MessageBox.Show("Задача была перенесена в категорию \"Выполнено\"");
         }
         private void ClicToTab(object sender, SelectionChangedEventArgs e)
