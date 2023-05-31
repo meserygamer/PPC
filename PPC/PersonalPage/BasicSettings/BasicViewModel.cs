@@ -17,21 +17,69 @@ using System.Windows.Shapes;
 
 namespace PPC.PersonalPage
 {
-    public class BasicViewModel : INotifyPropertyChanged
+    public class BasicViewModel : DependencyObject, INotifyPropertyChanged
     {
         #region Поля
         private string _name;
         private string _patronymic;
         private string _surname;
         private string _phone;
-        private string _confirmName;
+        public static readonly DependencyProperty ConfirmNameProperty;
+        public static readonly DependencyProperty ConfirmSurnameProperty;
+        public static readonly DependencyProperty ConfirmPatronymicProperty;
+        public static readonly DependencyProperty ConfirmPhoneProperty;
+        /*private string _confirmName;
         private string _confirmSurname;
         private string _confirmPatronymic;
-        private string _confirmPhone;
+        private string _confirmPhone;*/
         private StateSettings _stateOfSettings;
         private RelayCommand _confirmSettings;
         #endregion
         #region Свойства
+        public string ConfirmName
+        {
+            get
+            {
+                return (string)GetValue(ConfirmNameProperty);
+            }
+            set
+            {
+                SetValue(ConfirmNameProperty, value);
+            }
+        }
+        public string ConfirmSurname
+        {
+            get
+            {
+                return (string)GetValue(ConfirmSurnameProperty);
+            }
+            set
+            {
+                SetValue(ConfirmSurnameProperty, value);
+            }
+        }
+        public string ConfirmPatronymic
+        {
+            get
+            {
+                return (string)GetValue(ConfirmPatronymicProperty);
+            }
+            set
+            {
+                SetValue(ConfirmPatronymicProperty, value);
+            }
+        }
+        public string ConfirmPhone
+        {
+            get
+            {
+                return (string)GetValue(ConfirmPhoneProperty);
+            }
+            set
+            {
+                SetValue(ConfirmPhoneProperty, value);
+            }
+        }
         public string Name
         {
             get { return _name; }
@@ -103,17 +151,16 @@ namespace PPC.PersonalPage
             }
         }
         #endregion
+        static BasicViewModel()
+        {
+            ConfirmNameProperty = DependencyProperty.Register("ConfirmName", typeof(string), typeof(BasicViewModel));
+            ConfirmNameProperty = DependencyProperty.Register("ConfirmSurname", typeof(string), typeof(BasicViewModel));
+            ConfirmNameProperty = DependencyProperty.Register("ConfirmPatronymic", typeof(string), typeof(BasicViewModel));
+            ConfirmNameProperty = DependencyProperty.Register("ConfirmPhone", typeof(string), typeof(BasicViewModel));
+        }
         public BasicViewModel()
         {
-            Name = ((Date_Users)Application.Current.Resources["UserData"]).Users.Name;
-            Surname = ((Date_Users)Application.Current.Resources["UserData"]).Users.Surname;
-            Patronymic = ((Date_Users)Application.Current.Resources["UserData"]).Users.Patronymic;
-            Phone = ((Date_Users)Application.Current.Resources["UserData"]).Users.Phone;
-            _confirmName = Name;
-            _confirmSurname = Surname;
-            _confirmPatronymic = Patronymic;
-            _confirmPhone = Phone;
-            StateOfSettings = StateSettings.SettingsNotChanged;
+            ReturnFieldsDataToConfirmState();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
@@ -122,10 +169,10 @@ namespace PPC.PersonalPage
         }
         public void ReturnFieldsDataToConfirmState()
         {
-            Name = _confirmName;
-            Surname = _confirmSurname;
-            Patronymic = _confirmPatronymic;
-            Phone = _confirmPhone;
+            Name = ConfirmName;
+            Surname = ConfirmSurname;
+            Patronymic = ConfirmPatronymic;
+            Phone = ConfirmPhone;
             StateOfSettings = StateSettings.SettingsNotChanged;
         }
     }
