@@ -13,6 +13,5 @@ namespace PPC
     /// </summary>
     public partial class App : Application
     {
-        public static Date_Users AuthorizationData;
     }
 }

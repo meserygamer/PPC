@@ -138,15 +138,19 @@ namespace PPC.PersonalPage
                         {
                             if(BasicModel.FioOnEmpty(Surname, Name, Patronymic))
                             {
-                                MessageBox.Show("Введите свои фамилию, имя и отчество");
+                                MessageBox.Show("Строки ФИО должны быть заполнены");
+                                ReturnFieldsDataToConfirmState();
                                 return;
                             }
                             if(!BasicModel.NumCheck(Phone))
                             {
                                 MessageBox.Show("Номер телефона должен вводиться в формате 7(ХХХ)ХХХ-ХХ-ХХ");
+                                ReturnFieldsDataToConfirmState();
                                 return;
                             }
-                            MessageBox.Show("Данные успешно");
+                            BasicModel.ChangeFIO(Name, Surname, Patronymic, Phone);
+                            MessageBox.Show("Данные успешно обновленны");
+                            ReturnFieldsDataToConfirmState();
                         }));
             }
         }
@@ -154,13 +158,16 @@ namespace PPC.PersonalPage
         static BasicViewModel()
         {
             ConfirmNameProperty = DependencyProperty.Register("ConfirmName", typeof(string), typeof(BasicViewModel));
-            ConfirmNameProperty = DependencyProperty.Register("ConfirmSurname", typeof(string), typeof(BasicViewModel));
-            ConfirmNameProperty = DependencyProperty.Register("ConfirmPatronymic", typeof(string), typeof(BasicViewModel));
-            ConfirmNameProperty = DependencyProperty.Register("ConfirmPhone", typeof(string), typeof(BasicViewModel));
+            ConfirmSurnameProperty = DependencyProperty.Register("ConfirmSurname", typeof(string), typeof(BasicViewModel));
+            ConfirmPatronymicProperty = DependencyProperty.Register("ConfirmPatronymic", typeof(string), typeof(BasicViewModel));
+            ConfirmPhoneProperty = DependencyProperty.Register("ConfirmPhone", typeof(string), typeof(BasicViewModel));
         }
         public BasicViewModel()
         {
-            ReturnFieldsDataToConfirmState();
+            Name = ((Date_Users)Application.Current.Resources["UserData"]).Users.Name;
+            Surname = ((Date_Users)Application.Current.Resources["UserData"]).Users.Surname;
+            Patronymic = ((Date_Users)Application.Current.Resources["UserData"]).Users.Patronymic;
+            Phone = ((Date_Users)Application.Current.Resources["UserData"]).Users.Phone;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
