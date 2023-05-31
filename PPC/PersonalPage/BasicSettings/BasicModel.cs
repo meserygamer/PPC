@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace PPC.PersonalPage
 {
-    internal class BasicModel
+    public class BasicModel
     {
         public static bool FioOnEmpty(string Surname, string Name, string Patronymic)
         {
