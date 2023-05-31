@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PPC.PersonalPage"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignWidth="800"
              d:DesignHeight="800"
@@ -71,6 +72,14 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding StateOfSettings}" Value="SettingsChanged">
+                    <Setter Property="Background" Value="#E84545"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding StateOfSettings}" Value="SettingsNotChanged">
+                    <Setter Property="Background" Value="#2B2E4A"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -85,20 +94,29 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Электронная почта</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Email}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Старый пароль</TextBlock>
-            <PasswordBox x:Name="OldPass" Style="{StaticResource PasswordFileds}"/>
+            <PasswordBox x:Name="OldPass" Style="{StaticResource PasswordFileds}">
+                <i:Interaction.Behaviors>
+                    <local:PasswordBehavior Password="{Binding Oldpass, Mode=TwoWay}"/>
+                </i:Interaction.Behaviors>
+            </PasswordBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Новый пароль</TextBlock>
-            <PasswordBox x:Name="NewPass" Style="{StaticResource PasswordFileds}"/>
+            <PasswordBox x:Name="NewPass" Style="{StaticResource PasswordFileds}">
+                <i:Interaction.Behaviors>
+                    <local:PasswordBehavior Password="{Binding Newpass, Mode=TwoWay}"/>
+                </i:Interaction.Behaviors>
+            </PasswordBox>
         </StackPanel>
         <Button Grid.Column="0"
                 Grid.Row="3"
                 Margin="0 70 0 0"
-                Style="{StaticResource ApplyButton}">ПОДТВЕРДИТЬ ИЗМЕНЕНИЯ
+                Style="{StaticResource ApplyButton}"
+                Command="{Binding ConfirmSettings}">ПОДТВЕРДИТЬ ИЗМЕНЕНИЯ
         </Button>
     </Grid>
 </UserControl>

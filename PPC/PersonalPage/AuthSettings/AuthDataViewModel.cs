@@ -21,8 +21,11 @@ namespace PPC.PersonalPage
     {
         #region Поля
         private string _email;
-        private string _oldpass;
+        private string _confirmEmail;
+        private string _oldPass;
         private string _newpass;
+        private StateSettings _stateOfSettings;
+        private RelayCommand _confirmSettings;
         #endregion
         #region Свойства
         public string Email
@@ -32,15 +35,17 @@ namespace PPC.PersonalPage
             {
                 _email = value;
                 OnProperyChanged("Email");
+                StateOfSettings = StateSettings.SettingsChanged;
             }
         }
         public string Oldpass
         {
-            get { return _oldpass; }
+            get { return _oldPass; }
             set
             {
-                _oldpass = value;
+                _oldPass = value;
                 OnProperyChanged("Oldpass");
+                StateOfSettings = StateSettings.SettingsChanged;
             }
         }
         public string Newpass
@@ -50,17 +55,65 @@ namespace PPC.PersonalPage
             {
                 _newpass = value;
                 OnProperyChanged("Newpass");
+                StateOfSettings = StateSettings.SettingsChanged;
+            }
+        }
+        public StateSettings StateOfSettings
+        {
+            get { return _stateOfSettings; }
+            set 
+            {
+                _stateOfSettings = value;
+                OnProperyChanged("StateOfSettings");
+            }
+        }
+        public RelayCommand ConfirmSettings
+        {
+            get
+            {
+                return _confirmSettings ??
+                    (_confirmSettings = new RelayCommand(
+                        a =>
+                        {
+                            if(!AuthDataModel.CheckEmail(Email))
+                            {
+                                MessageBox.Show("Введенный Email некорректен");
+                                ReturnFieldsDataToConfirmState();
+                                return;
+                            }
+                            if(!AuthDataModel.CheckPassword(Oldpass))
+                            {
+                                MessageBox.Show("Введенный пароль не соответсвует требованиям");
+                                ReturnFieldsDataToConfirmState();
+                                return;
+                            }
+                            if (!AuthDataModel.CheckPasswordOnEquals(Oldpass, Newpass))
+                            {
+                                MessageBox.Show("Введенные пароли различаются");
+                                ReturnFieldsDataToConfirmState();
+                                return;
+                            }
+                        }));
             }
         }
         #endregion
         public AuthDataViewModel()
         {
             Email = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
+            _confirmEmail = Email;
+            StateOfSettings = StateSettings.SettingsNotChanged;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+        public void ReturnFieldsDataToConfirmState()
+        {
+            Email = _confirmEmail;
+            Oldpass = "";
+            Newpass = "";
+            StateOfSettings = StateSettings.SettingsNotChanged;
         }
     }
 }
