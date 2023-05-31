@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+using System.Data.SqlClient;
 
 namespace PPC
 {
@@ -67,7 +69,6 @@ namespace PPC
             foreach(Task task in b)
             {
                 a.Add(new WindowTasksModel() {
-                    //FIO = task.Users.Surname +" "+ task.Users.Name,
                     Name_task = task.Date_task.Name_task,
                     Date_finish_job = task.Date_task.Date_finish_job,
                     Date_start_job = task.Date_task.Date_start_job,
@@ -77,6 +78,13 @@ namespace PPC
         }
         public void updateDB(object sender, RoutedEventArgs e)
         {
+            
+            using (SqlConnection con = new SqlConnection())
+            {
+                con.Open();
+
+            }
+
             using (TheBestV2Entities db = new TheBestV2Entities())
             {
                 Date_task task= new Date_task

@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Configuration;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Data.SqlClient;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -19,7 +21,8 @@ namespace PPC
     /// Логика взаимодействия для WindowTasks.xaml
     /// </summary>
     public partial class WindowTasks : Window
-    { 
+    {
+        string connectionString;
         public WindowTasks()
         {
             InitializeComponent();
@@ -36,7 +39,9 @@ namespace PPC
             surnameToStatic.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.NameProperty, nameToStatic);
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.SurnameProperty, surnameToStatic);
-            
+
+           // connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
         }
         private void complete_task(object sender, RoutedEventArgs e)
         {

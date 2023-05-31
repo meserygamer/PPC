@@ -15,7 +15,6 @@ namespace PPC
         private string description_task;
         private Nullable<System.DateTime> date_start_job;
         private Nullable<System.DateTime> date_finish_job;
-        //private string fio;
 
         public string Name_task
         {
@@ -26,17 +25,6 @@ namespace PPC
                 OnPropertyChanged("Name_task");
             }
         }
-        /*
-        public string FIO
-        {
-            get { return fio; }
-            set
-            {
-                fio = value;
-                OnPropertyChanged("FIO");
-            }
-        }
-        */
         public string Description_task
         {
             get { return description_task; }
