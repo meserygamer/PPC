@@ -16,7 +16,7 @@
                              Name="Иван"
                              Patronymic="Иванович"
                              Surname="Иванов"
-                             Phone="88005553535"
+                             Phone="7(800)555-35-35"
                              ID_user="0"/>
             </local:Date_Users.Users>
         </local:Date_Users>

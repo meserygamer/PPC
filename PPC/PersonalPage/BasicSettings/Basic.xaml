@@ -56,6 +56,14 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding StateOfSettings}" Value="SettingsChanged">
+                    <Setter Property="Background" Value="#E84545"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding StateOfSettings}" Value="SettingsNotChanged">
+                    <Setter Property="Background" Value="#2B2E4A"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -71,23 +79,24 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Фамилия</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Surname}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Имя</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Name}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Отчество</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Patronymic}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Grid.RowSpan="2">
             <TextBlock Style="{StaticResource TextForSettings}">Телефон</TextBlock>
-            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Phone}"/>
+            <TextBox Style="{StaticResource SettingsFields}" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <Button Grid.Column="0"
                 Grid.Row="4"
                 Margin="0 70 0 0"
-                Style="{StaticResource ApplyButton}">ПОДТВЕРДИТЬ ИЗМЕНЕНИЯ</Button>
+                Style="{StaticResource ApplyButton}"
+                 Command="{Binding ConfirmSettings}">ПОДТВЕРДИТЬ ИЗМЕНЕНИЯ</Button>
     </Grid>
 </UserControl>

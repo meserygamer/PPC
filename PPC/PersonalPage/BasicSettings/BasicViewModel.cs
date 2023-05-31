@@ -24,6 +24,12 @@ namespace PPC.PersonalPage
         private string _patronymic;
         private string _surname;
         private string _phone;
+        private string _confirmName;
+        private string _confirmSurname;
+        private string _confirmPatronymic;
+        private string _confirmPhone;
+        private StateSettings _stateOfSettings;
+        private RelayCommand _confirmSettings;
         #endregion
         #region Свойства
         public string Name
@@ -32,6 +38,7 @@ namespace PPC.PersonalPage
             set {
                 _name = value;
                 OnProperyChanged("Name");
+                StateOfSettings = StateSettings.SettingsChanged;
             }
         }
         public string Patronymic
@@ -41,6 +48,7 @@ namespace PPC.PersonalPage
             {
                 _patronymic = value;
                 OnProperyChanged("Patronymic");
+                StateOfSettings = StateSettings.SettingsChanged;
             }
         }
         public string Surname
@@ -50,6 +58,7 @@ namespace PPC.PersonalPage
             {
                 _surname = value;
                 OnProperyChanged("Surname");
+                StateOfSettings = StateSettings.SettingsChanged;
             }
         }
         public string Phone
@@ -59,6 +68,38 @@ namespace PPC.PersonalPage
             {
                 _phone = value;
                 OnProperyChanged("Phone");
+                StateOfSettings = StateSettings.SettingsChanged;
+            }
+        }
+        public StateSettings StateOfSettings
+        {
+            get { return _stateOfSettings; }
+            set
+            {
+                _stateOfSettings = value;
+                OnProperyChanged("StateOfSettings");
+            }
+        }
+        public RelayCommand ConfirmSettings
+        {
+            get
+            {
+                return _confirmSettings ??
+                    (_confirmSettings = new RelayCommand(
+                        a =>
+                        {
+                            if(BasicModel.FioOnEmpty(Surname, Name, Patronymic))
+                            {
+                                MessageBox.Show("Введите свои фамилию, имя и отчество");
+                                return;
+                            }
+                            if(!BasicModel.NumCheck(Phone))
+                            {
+                                MessageBox.Show("Номер телефона должен вводиться в формате 7(ХХХ)ХХХ-ХХ-ХХ");
+                                return;
+                            }
+                            MessageBox.Show("Данные успешно");
+                        }));
             }
         }
         #endregion
@@ -68,11 +109,24 @@ namespace PPC.PersonalPage
             Surname = ((Date_Users)Application.Current.Resources["UserData"]).Users.Surname;
             Patronymic = ((Date_Users)Application.Current.Resources["UserData"]).Users.Patronymic;
             Phone = ((Date_Users)Application.Current.Resources["UserData"]).Users.Phone;
+            _confirmName = Name;
+            _confirmSurname = Surname;
+            _confirmPatronymic = Patronymic;
+            _confirmPhone = Phone;
+            StateOfSettings = StateSettings.SettingsNotChanged;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+        public void ReturnFieldsDataToConfirmState()
+        {
+            Name = _confirmName;
+            Surname = _confirmSurname;
+            Patronymic = _confirmPatronymic;
+            Phone = _confirmPhone;
+            StateOfSettings = StateSettings.SettingsNotChanged;
         }
     }
 }

@@ -112,6 +112,7 @@
     <Compile Include="PersonalPage\BasicSettings\Basic.xaml.cs">
       <DependentUpon>Basic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PersonalPage\BasicSettings\BasicModel.cs" />
     <Compile Include="PersonalPage\BasicSettings\BasicViewModel.cs" />
     <Compile Include="PersonalPage\PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
