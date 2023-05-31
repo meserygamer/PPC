@@ -81,18 +81,21 @@ namespace PPC.PersonalPage
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
-                            if(!AuthDataModel.CheckPassword(Oldpass))
+                            if(!AuthDataModel.CheckPasswordOnEquals(Oldpass, ((Date_Users)Application.Current.Resources["UserData"]).Password))
                             {
-                                MessageBox.Show("Введенный пароль не соответсвует требованиям");
+                                MessageBox.Show("Введен неверный пароль");
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
-                            if (!AuthDataModel.CheckPasswordOnEquals(Oldpass, Newpass))
+                            if (!AuthDataModel.CheckPassword(Newpass))
                             {
-                                MessageBox.Show("Введенные пароли различаются");
+                                MessageBox.Show("Новый пароль не соответсветсвует требованиям");
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
+                            AuthDataModel.ChangeAuthData(((Date_Users)Application.Current.Resources["UserData"]).Users.ID_user, Newpass, Email);
+                            ReturnFieldsDataToConfirmState();
+                            return;
                         }));
             }
         }
@@ -110,6 +113,7 @@ namespace PPC.PersonalPage
         }
         public void ReturnFieldsDataToConfirmState()
         {
+            _confirmEmail = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
             Email = _confirmEmail;
             Oldpass = "";
             Newpass = "";

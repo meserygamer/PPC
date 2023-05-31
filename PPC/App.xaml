@@ -5,7 +5,7 @@
              StartupUri="PersonalPage/PersonalPage.xaml">
     <Application.Resources>
         <local:Date_Users x:Key="UserData"
-                          ID_role="0" ID_user="0"
+                          ID_role="2" ID_user="11"
                           Login="TestLogin"
                           Password="TestPassword">
             <local:Date_Users.Role>
@@ -17,7 +17,7 @@
                              Patronymic="Иванович"
                              Surname="Иванов"
                              Phone="88005553535"
-                             ID_user="0"/>
+                             ID_user="11"/>
             </local:Date_Users.Users>
         </local:Date_Users>
     </Application.Resources>
