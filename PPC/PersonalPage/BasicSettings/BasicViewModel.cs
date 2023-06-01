@@ -24,28 +24,60 @@ namespace PPC.PersonalPage
         private string _patronymic;
         private string _surname;
         private string _phone;
-        private string _confirmName;
+        public static readonly DependencyProperty ConfirmNameProperty;
+        public static readonly DependencyProperty ConfirmSurnameProperty;
+        public static readonly DependencyProperty ConfirmPatronymicProperty;
+        public static readonly DependencyProperty ConfirmPhoneProperty;
+        /*private string _confirmName;
         private string _confirmSurname;
         private string _confirmPatronymic;
-        private string _confirmPhone;
-        public static readonly DependencyProperty ConfirmUserProperty;
+        private string _confirmPhone;*/
         private StateSettings _stateOfSettings;
         private RelayCommand _confirmSettings;
         #endregion
         #region Свойства
-        public Date_Users ConfirmUser
+        public string ConfirmName
         {
             get
             {
-                return (Date_Users)GetValue(ConfirmUserProperty);
+                return (string)GetValue(ConfirmNameProperty);
             }
             set
             {
-                SetValue(ConfirmUserProperty, value);
-                _confirmName = ConfirmUser.Users.Name;
-                _confirmSurname = ConfirmUser.Users.Surname;
-                _confirmPatronymic = ConfirmUser.Users.Patronymic;
-                _confirmPhone = ConfirmUser.Users.Phone;
+                SetValue(ConfirmNameProperty, value);
+            }
+        }
+        public string ConfirmSurname
+        {
+            get
+            {
+                return (string)GetValue(ConfirmSurnameProperty);
+            }
+            set
+            {
+                SetValue(ConfirmSurnameProperty, value);
+            }
+        }
+        public string ConfirmPatronymic
+        {
+            get
+            {
+                return (string)GetValue(ConfirmPatronymicProperty);
+            }
+            set
+            {
+                SetValue(ConfirmPatronymicProperty, value);
+            }
+        }
+        public string ConfirmPhone
+        {
+            get
+            {
+                return (string)GetValue(ConfirmPhoneProperty);
+            }
+            set
+            {
+                SetValue(ConfirmPhoneProperty, value);
             }
         }
         public string Name
@@ -125,14 +157,17 @@ namespace PPC.PersonalPage
         #endregion
         static BasicViewModel()
         {
-            ConfirmUserProperty = DependencyProperty.Register("ConfirmUser", typeof(Date_Users), typeof(BasicViewModel));
+            ConfirmNameProperty = DependencyProperty.Register("ConfirmName", typeof(string), typeof(BasicViewModel));
+            ConfirmSurnameProperty = DependencyProperty.Register("ConfirmSurname", typeof(string), typeof(BasicViewModel));
+            ConfirmPatronymicProperty = DependencyProperty.Register("ConfirmPatronymic", typeof(string), typeof(BasicViewModel));
+            ConfirmPhoneProperty = DependencyProperty.Register("ConfirmPhone", typeof(string), typeof(BasicViewModel));
         }
         public BasicViewModel()
         {
-            _name = ((Date_Users)Application.Current.Resources["UserData"]).Users.Name;
-            _surname = ((Date_Users)Application.Current.Resources["UserData"]).Users.Surname;
-            _patronymic = ((Date_Users)Application.Current.Resources["UserData"]).Users.Patronymic;
-            _phone = ((Date_Users)Application.Current.Resources["UserData"]).Users.Phone;
+            Name = ((Date_Users)Application.Current.Resources["UserData"]).Users.Name;
+            Surname = ((Date_Users)Application.Current.Resources["UserData"]).Users.Surname;
+            Patronymic = ((Date_Users)Application.Current.Resources["UserData"]).Users.Patronymic;
+            Phone = ((Date_Users)Application.Current.Resources["UserData"]).Users.Phone;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
@@ -141,10 +176,10 @@ namespace PPC.PersonalPage
         }
         public void ReturnFieldsDataToConfirmState()
         {
-            Name = _confirmName;
-            Surname = _confirmSurname;
-            Patronymic = _confirmPatronymic;
-            Phone = _confirmPhone;
+            Name = ConfirmName;
+            Surname = ConfirmSurname;
+            Patronymic = ConfirmPatronymic;
+            Phone = ConfirmPhone;
             StateOfSettings = StateSettings.SettingsNotChanged;
         }
     }

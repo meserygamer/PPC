@@ -30,7 +30,7 @@ namespace PPC.PersonalPage
         {
             using(TheBestV2Entities DB = new TheBestV2Entities())
             {
-                Date_Users User = DB.Date_Users.Find(((Date_Users)Application.Current.FindResource("UserData")).Login);
+                Date_Users User = DB.Date_Users.Find(((Date_Users)Application.Current.Resources["UserData"]).Login);
                 User.Users.Name = Name;
                 User.Users.Phone = Phone;
                 User.Users.Surname = Surname;
