@@ -23,10 +23,29 @@ namespace PPC
     public class WindowTasksViewModel :DependencyObject, INotifyPropertyChanged
     {
         private WindowTasksModel selectedTask;
-        public ObservableCollection<WindowTasksModel> Active_task { get; set; }
-        public ObservableCollection<WindowTasksModel> Complete_task { get; set; }
+        public ObservableCollection<WindowTasksModel> _active_task;
+        public ObservableCollection<WindowTasksModel> _complete_task;
         public static readonly DependencyProperty SurnameProperty;
         public static readonly DependencyProperty NameProperty;
+
+        public ObservableCollection<WindowTasksModel> Active_task
+        {
+            get { return _active_task; }
+            set
+            {
+                _active_task = value;
+                OnPropertyChanged("Active_task");
+            }
+        }
+        public ObservableCollection<WindowTasksModel> Complete_task
+        {
+            get { return _complete_task; }
+            set
+            {
+                _complete_task = value;
+                OnPropertyChanged("Complete_task");
+            }
+        }        
         public WindowTasksModel SelectedTask
         {
             get { return selectedTask; }
@@ -53,6 +72,10 @@ namespace PPC
         }
         public WindowTasksViewModel()
         {
+            updateSourse();
+        }
+        private void updateSourse()
+        {
             using (TheBestV2Entities DB = new TheBestV2Entities())
             {
                 DB.Task.Where(a => a.ID_user == ((Date_Users)Application.Current.Resources["UserData"]).ID_user);
@@ -69,6 +92,7 @@ namespace PPC
             foreach(Task task in b)
             {
                 a.Add(new WindowTasksModel() {
+                    Id_task = task.Date_task.ID_task,
                     Name_task = task.Date_task.Name_task,
                     Date_finish_job = task.Date_task.Date_finish_job,
                     Date_start_job = task.Date_task.Date_start_job,
@@ -76,40 +100,16 @@ namespace PPC
             }
             return a;
         }
-        public void updateDB(object sender, RoutedEventArgs e)
+        public void updateDB()
         {
-            
-            using (SqlConnection con = new SqlConnection())
+            using (TheBestV2Entities DB = new TheBestV2Entities())
             {
-                con.Open();
-
+                Date_task DT = DB.Date_task.Find(selectedTask.Id_task);
+                DT.ID_status = 2;
+                DB.SaveChanges();
             }
-
-            using (TheBestV2Entities db = new TheBestV2Entities())
-            {
-                Date_task task= new Date_task
-                {
-                    ID_status=2
-                };
-               // db.Date_task. .Add(AuthUser);
-                db.SaveChanges();
-            }
+            updateSourse();
         }
-        //private List<WindowTasksModel> ConvertTasksToWindowModel(List<Complete_tasks> b)
-        //{
-        //    List<WindowTasksModel> a = new List<WindowTasksModel>();
-        //    foreach (Complete_tasks task in b)
-        //    {
-        //        a.Add(new WindowTasksModel()
-        //        {
-        //            Name_task = task.Name_tasks,
-        //            Date_finish_job = task.Date_finish_job,
-        //            Date_start_job = task.Date_start_job,
-        //            Description_task = task.Description_task
-        //        });
-        //    }
-        //    return a;
-        //}
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

@@ -11,11 +11,21 @@ namespace PPC
 {
     public class WindowTasksModel : INotifyPropertyChanged
     {
+        private int id_task;
         private string name_task;
         private string description_task;
         private Nullable<System.DateTime> date_start_job;
         private Nullable<System.DateTime> date_finish_job;
 
+        public int Id_task
+        {
+            get { return id_task; }
+            set
+            {
+                id_task = value;
+                OnPropertyChanged("Id_task");
+            }
+        }
         public string Name_task
         {
             get { return name_task; }

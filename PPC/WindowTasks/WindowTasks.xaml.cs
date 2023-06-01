@@ -21,8 +21,7 @@ namespace PPC
     /// Логика взаимодействия для WindowTasks.xaml
     /// </summary>
     public partial class WindowTasks : Window
-    {
-        string connectionString;
+    {   
         public WindowTasks()
         {
             InitializeComponent();
@@ -40,13 +39,10 @@ namespace PPC
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.NameProperty, nameToStatic);
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.SurnameProperty, surnameToStatic);
 
-           // connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
         }
         private void complete_task(object sender, RoutedEventArgs e)
         {
-           
-            MessageBox.Show("Задача была перенесена в категорию \"Выполнено\"");
+           ((WindowTasksViewModel)(this.DataContext)).updateDB();
         }
         private void ClicToTab(object sender, SelectionChangedEventArgs e)
         {
@@ -59,6 +55,5 @@ namespace PPC
                 but_complete.Visibility = Visibility.Hidden ;
             }   
         }
-
     }
 }

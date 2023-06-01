@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPC"
         mc:Ignorable="d"
-        Title="WindowTasks" Height="1080" Width="1450">
+        Title="Задачи" Height="1080" Width="1450">
     <Window.Resources> 
         <Style x:Key="Text1">
             <Setter Property="TextBlock.FontFamily" Value="Abel [RUS by Daymarius]"/>
@@ -79,8 +79,8 @@
             <Setter Property="Background" Value="#E84545"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="50"/>
-            <Setter Property="TextBlock.FontFamily" Value="Kadwa"/>
-            <Setter Property="TextBlock.FontSize" Value="20"/>
+            <Setter Property="TextBlock.FontFamily" Value="Abel [RUS by Daymarius]"/>
+            <Setter Property="TextBlock.FontSize" Value="22"/>
             <Setter Property="TextBlock.Foreground" Value="Black"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -113,7 +113,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Background="White" Margin="15,10,15,10">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/WindowTasks/Avatarka.png" Height="100" Width="100" Margin="10"/>
-                <TextBlock Style="{StaticResource Text1}">
+                <TextBlock Style="{StaticResource Text1}" >
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="Name" />
