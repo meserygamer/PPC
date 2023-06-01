@@ -9,6 +9,8 @@
              d:DesignWidth="800"
              Background="White">
     <UserControl.Resources>
+        <local:BasicViewModel x:Key="VM"
+                              ConfirmUser = "{DynamicResource UserData}"></local:BasicViewModel>
         <Style TargetType="TextBlock" x:Key = "TextForSettings">
             <Setter Property="FontFamily" Value ="Abel [RUS by Daymarius]"/>
             <Setter Property="FontSize" Value="36"/>
