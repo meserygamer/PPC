@@ -17,11 +17,12 @@ using System.Windows.Shapes;
 
 namespace PPC.PersonalPage
 {
-    internal class AuthDataViewModel : INotifyPropertyChanged
+    internal class AuthDataViewModel : DependencyObject, INotifyPropertyChanged
     {
         #region Поля
         private string _email;
-        private string _confirmEmail;
+        //private string _confirmEmail;
+        public static readonly DependencyProperty ConfirmEmailProperty;
         private string _oldPass;
         private string _newpass;
         private StateSettings _stateOfSettings;
@@ -58,6 +59,17 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        public string ConfirmEmail
+        { 
+            get
+            {
+                return (string)GetValue(ConfirmEmailProperty);
+            }
+            set
+            {
+                SetValue(ConfirmEmailProperty, value);
+            }
+        }
         public StateSettings StateOfSettings
         {
             get { return _stateOfSettings; }
@@ -81,26 +93,32 @@ namespace PPC.PersonalPage
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
-                            if(!AuthDataModel.CheckPassword(Oldpass))
+                            if(!AuthDataModel.CheckPasswordOnEquals(Oldpass, ((Date_Users)Application.Current.Resources["UserData"]).Password))
                             {
-                                MessageBox.Show("Введенный пароль не соответсвует требованиям");
+                                MessageBox.Show("Введен неверный пароль");
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
-                            if (!AuthDataModel.CheckPasswordOnEquals(Oldpass, Newpass))
+                            if (!AuthDataModel.CheckPassword(Newpass))
                             {
-                                MessageBox.Show("Введенные пароли различаются");
+                                MessageBox.Show("Новый пароль не соответсветсвует требованиям");
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
+                            AuthDataModel.ChangeAuthData(((Date_Users)Application.Current.Resources["UserData"]).Users.ID_user, Newpass, Email);
+                            ReturnFieldsDataToConfirmState();
+                            return;
                         }));
             }
         }
         #endregion
+        static AuthDataViewModel()
+        {
+            ConfirmEmailProperty = DependencyProperty.Register("ConfirmEmail", typeof(string), typeof(AuthDataViewModel));
+        }
         public AuthDataViewModel()
         {
             Email = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
-            _confirmEmail = Email;
             StateOfSettings = StateSettings.SettingsNotChanged;
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -110,7 +128,8 @@ namespace PPC.PersonalPage
         }
         public void ReturnFieldsDataToConfirmState()
         {
-            Email = _confirmEmail;
+            ConfirmEmail = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
+            Email = ConfirmEmail;
             Oldpass = "";
             Newpass = "";
             StateOfSettings = StateSettings.SettingsNotChanged;

@@ -25,24 +25,14 @@ namespace PPC.PersonalPage
         public AuthData()
         {
             InitializeComponent();
-            DataContext = new AuthDataViewModel();
-            //OldPass.PasswordChanged += OldPassword_PasswordChanged;
-            //NewPass.PasswordChanged += NewPassword_PasswordChanged;
+            AuthDataViewModel Vm = new AuthDataViewModel();
+            DataContext = Vm;
+            Binding BindingEmailToStaticResource = new Binding();
+            BindingEmailToStaticResource.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
+            BindingEmailToStaticResource.Path = new PropertyPath("Email");
+            BindingEmailToStaticResource.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(Vm, AuthDataViewModel.ConfirmEmailProperty, BindingEmailToStaticResource);
         }
-        //private void OldPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        //{
-        //    if (this.DataContext != null)
-        //    {
-        //        ((AuthDataViewModel)this.DataContext).Oldpass = ((PasswordBox)sender).Password;
-        //    }
-        //}
-        //private void NewPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        //{
-        //    if (this.DataContext != null)
-        //    {
-        //        ((AuthDataViewModel)this.DataContext).Newpass = ((PasswordBox)sender).Password;
-        //    }
-        //}
     }
     public class PasswordBehavior : Behavior<PasswordBox>
     {
