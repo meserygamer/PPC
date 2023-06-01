@@ -179,48 +179,48 @@ namespace PPC
         }
 
         [TestMethod]
-        public void TestFioOnEmptyPatronymic()
+        public void TestFioOnEmptyPatronymic()//Проверяет возвращает ли метод на проверку заполненности ФИО результат True, при незаполненном отчестве
         {
             bool result = BasicModel.FioOnEmpty("Ivanov", "Ivan", "");
             Assert.IsTrue(result);
         }
         [TestMethod]
-        public void TestFioOnEmptyName()
+        public void TestFioOnEmptyName()//Проверяет возвращает ли метод на проверку заполненности ФИО результат True, при незаполненном имени
         {
             bool result = BasicModel.FioOnEmpty("Ivanov", "", "Patronymic");
             Assert.IsTrue(result);
         }
         [TestMethod]
-        public void TestFioOnEmptySurname()
+        public void TestFioOnEmptySurname()//Проверяет возвращает ли метод на проверку заполненности ФИО результат True, при незаполненной фамилии
         {
             bool result = BasicModel.FioOnEmpty("", "Ivan", "Ivanovich");
             Assert.IsTrue(result);
         }
-        public void TestFioOnEmptyPatronymicNull()
+        public void TestFioOnEmptyPatronymicNull()//Проверяет возвращает ли метод на проверку заполненности ФИО результат True, при нулевом значении отчества
         {
             bool result = BasicModel.FioOnEmpty("Ivanov", "Ivan", null);
             Assert.IsTrue(result);
         }
         [TestMethod]
-        public void TestFioOnEmptyNameNull()
+        public void TestFioOnEmptyNameNull()//Проверяет возвращает ли метод на проверку заполненности ФИО результат True, при нулевом значении имени
         {
             bool result = BasicModel.FioOnEmpty("Ivanov", null, "Patronymic");
             Assert.IsTrue(result);
         }
         [TestMethod]
-        public void TestFioOnEmptySurnameNull()
+        public void TestFioOnEmptySurnameNull()//Проверяет возвращает ли метод на проверку заполненности ФИО результат True, при нулевом значении фамилии
         {
             bool result = BasicModel.FioOnEmpty(null, "Ivan", "Ivanovich");
             Assert.IsTrue(result);
         }
         [TestMethod]
-        public void TestNumMaskEmpty()
+        public void TestNumMaskEmpty()//Проверяет возвращает ли метод на проверку маски телефона результат False, при незаполненном поле
         {
             bool result = BasicModel.NumCheck("");
             Assert.IsFalse(result);
         }
         [TestMethod]
-        public void TestNumMaskIncorrect()
+        public void TestNumMaskIncorrect()//Проверяет возвращает ли метод на проверку маски телефона результат False, при неправильно заполненном поле
         {
             bool result = BasicModel.NumCheck("7(800)5553535");
             Assert.IsFalse(result);
@@ -228,24 +228,24 @@ namespace PPC
         [TestMethod]
         public void TestNumMaskCorrect()
         {
-            bool result = BasicModel.NumCheck("7(800)555-35-35");
+            bool result = BasicModel.NumCheck("7(800)555-35-35");//Проверяет возвращает ли метод на проверку маски телефона результат False, при правильно заполненном поле
             Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void TestEmailMaskEmpty()
+        public void TestEmailMaskEmpty()//Проверяет возвращает ли метод на проверку маски почты результат False, при незаполненном поле
         {
             bool result = AuthDataModel.CheckEmail("");
             Assert.IsFalse(result);
         }
         [TestMethod]
-        public void TestEmailMaskIncorrect()
+        public void TestEmailMaskIncorrect()//Проверяет возвращает ли метод на проверку маски почты результат False, при неправильно заполненном поле
         {
             bool result = AuthDataModel.CheckEmail("test@mailru");
             Assert.IsFalse(result);
         }
         [TestMethod]
-        public void TestEmailMaskCorrect()
+        public void TestEmailMaskCorrect()//Проверяет возвращает ли метод на проверку маски почты результат False, при правильно заполненном поле
         {
             bool result = AuthDataModel.CheckEmail("test@mail.ru");
             Assert.IsTrue(result);
