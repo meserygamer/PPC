@@ -180,7 +180,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Button x:Name="but_complete" Style="{StaticResource but1}" Click="complete_task">Выполнено</Button>
+            <Button x:Name="but_complete" Style="{StaticResource but1}" Click="Complete_task">Выполнено</Button>
         </StackPanel>
     </Grid>
 </Window>

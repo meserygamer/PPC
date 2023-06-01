@@ -25,9 +25,10 @@ namespace PPC
         public WindowTasks()
         {
             InitializeComponent();
-
+            //Данные для вывода актуальных задач
             WindowTasksViewModel viewModel = new WindowTasksViewModel();
             DataContext = viewModel;
+            //Реализация динамического изменения имени для отображения 
             Binding nameToStatic = new Binding();
             Binding surnameToStatic = new Binding();
             nameToStatic.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
@@ -37,13 +38,15 @@ namespace PPC
             nameToStatic.Mode = BindingMode.TwoWay;
             surnameToStatic.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.NameProperty, nameToStatic);
-            BindingOperations.SetBinding(viewModel, WindowTasksViewModel.SurnameProperty, surnameToStatic);
+            BindingOperations.SetBinding(viewModel, WindowTasksViewModel.SurnameProperty, surnameToStatic);            
 
         }
-        private void complete_task(object sender, RoutedEventArgs e)
+        //Функция вызова изменений статуса задач "Активная" -> "Выполнено"
+        private void Complete_task(object sender, RoutedEventArgs e)
         {
            ((WindowTasksViewModel)(this.DataContext)).updateDB();
         }
+        //Функция изменения видимость кнопки для разных задач
         private void ClicToTab(object sender, SelectionChangedEventArgs e)
         {
             if (tabActive.IsSelected)

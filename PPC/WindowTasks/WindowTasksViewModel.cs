@@ -20,6 +20,7 @@ using System.Data.SqlClient;
 
 namespace PPC
 {
+    //Класс функцияональности программы
     public class WindowTasksViewModel :DependencyObject, INotifyPropertyChanged
     {
         private WindowTasksModel selectedTask;
@@ -74,6 +75,7 @@ namespace PPC
         {
             updateSourse();
         }
+        //функция работы с БД (вывод актуальных данных)
         private void updateSourse()
         {
             using (TheBestV2Entities DB = new TheBestV2Entities())
@@ -100,6 +102,7 @@ namespace PPC
             }
             return a;
         }
+        //функция работы с кнопкой "Выполнить"
         public void updateDB()
         {
             using (TheBestV2Entities DB = new TheBestV2Entities())

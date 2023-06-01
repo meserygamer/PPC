@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace PPC
 {
+    //Класс дял возвращения значений полей из БД
     public class WindowTasksModel : INotifyPropertyChanged
     {
         private int id_task;
