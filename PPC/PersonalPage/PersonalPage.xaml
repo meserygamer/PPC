@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPC.PersonalPage"
         mc:Ignorable="d"
-        Title="Window1" Height="1024" Width="1440">
+        Title="Window1" Height="1024" Width="1440"
+          WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="ForAllButtonSettings" TargetType="Button">
             <Setter Property="Padding" Value="25"/>
@@ -79,7 +80,12 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Background="#2B2E4A" HorizontalAlignment="Stretch">
             <TextBlock FontFamily="Abel [RUS by Daymarius]" Height="34" FontSize="36" Foreground="White" Margin="22,22,0,0">Личный кабинет</TextBlock>
-            <TextBlock FontFamily="Abel [RUS by Daymarius]" Height="24" FontSize="20" Foreground="#BEBEBE" Margin="22,10,0,0">Задачи - Личный кабинет</TextBlock>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock MouseLeftButtonDown="ClickToTask" FontFamily="Abel [RUS by Daymarius]" Height="24" FontSize="20" Foreground="#BEBEBE" Margin="22,10,0,0" Text="Задачи " TextDecorations="Underline" FontWeight="Normal"/>
+                <TextBlock FontFamily="Abel [RUS by Daymarius]" Height="24" FontSize="20" Foreground="#BEBEBE" Margin="0,10,0,0" TextDecorations="{x:Null}">
+                - Личный кабинет
+                </TextBlock>
+            </StackPanel>
             <Button Content="Общие данные"
                     Style="{StaticResource BasicDataButton}"
                     Command="{Binding BasicButton}"

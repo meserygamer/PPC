@@ -38,6 +38,7 @@ namespace PPC.PersonalPage
                 Application.Current.Resources["UserData"] = User;
                 DB.SaveChanges();
             }
+
         }
     }
 }

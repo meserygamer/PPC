@@ -24,5 +24,13 @@ namespace PPC.PersonalPage
             InitializeComponent();
             this.DataContext = new PersonalPageViewModel();
         }
+        private void ClickToTask(object sender, RoutedEventArgs e)
+        {
+            WindowTasks PP = new WindowTasks();
+            PP.Show();
+            this.Close();
+        }
     }
+
+  
 }

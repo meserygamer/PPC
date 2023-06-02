@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPC"
         mc:Ignorable="d"
+         WindowState="Maximized"
         Title="MainWindow" Height="1024px" Width="1440px">
     <Window.Resources>
         <Style x:Key="FontForTextBlockOnLoginAndPassword"

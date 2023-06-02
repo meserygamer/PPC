@@ -130,6 +130,8 @@ namespace PPC.PersonalPage
             Patronymic = _confirmPatronymic;
             Phone = _confirmPhone;
             StateOfSettings = StateSettings.SettingsNotChanged;
+
+            WindowTasksViewModel TVM = new WindowTasksViewModel();
         }
     }
 }

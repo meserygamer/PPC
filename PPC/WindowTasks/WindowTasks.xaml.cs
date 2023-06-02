@@ -60,6 +60,7 @@ namespace PPC
         {
             PersonalPage.PersonalPage PP = new PersonalPage.PersonalPage();
             PP.Show();
+            this.Close();
         }
     }
 }

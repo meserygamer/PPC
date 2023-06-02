@@ -97,6 +97,6 @@
                 Grid.Row="4"
                 Margin="0 70 0 0"
                 Style="{StaticResource ApplyButton}"
-                 Command="{Binding ConfirmSettings}">ПОДТВЕРДИТЬ ИЗМЕНЕНИЯ</Button>
+                Command="{Binding ConfirmSettings}">ПОДТВЕРДИТЬ ИЗМЕНЕНИЯ</Button>
     </Grid>
 </UserControl>
