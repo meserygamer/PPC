@@ -13,12 +13,16 @@ namespace PPC
         public static Date_Users AuthorizationInSystem(string Login, string Password)
         {
             List<Date_Users> Users;
+            Date_Users User;
             using (TheBestV2Entities DB = new TheBestV2Entities())
             {
                 Users = DB.Date_Users.Where(a => a.Login == Login && a.Password == Password).ToList();
+                if (Users.Count != 0) User = Users.ToList().First();
+                else User = new Date_Users();
+                User.Users = User.Users;
+                User.Role = User.Role;
+                return User;
             }
-            if(Users.Count != 0) return Users[0];
-            else return new Date_Users();
         }
     }
 }

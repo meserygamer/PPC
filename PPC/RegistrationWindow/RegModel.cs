@@ -25,7 +25,10 @@ namespace PPC
             }
             using (TheBestV2Entities db = new TheBestV2Entities())
             {
-                return db.Date_Users.Find(Login);
+                Date_Users User = db.Date_Users.Find(Login);
+                User.Users = User.Users;
+                User.Role = User.Role;
+                return User;
             }
         }
         public static bool CheckLoginInSystem(string login)
