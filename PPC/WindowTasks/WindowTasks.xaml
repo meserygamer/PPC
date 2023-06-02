@@ -132,13 +132,13 @@
                         <ListBox BorderThickness="0" ItemsSource="{Binding Active_task}" SelectedItem="{Binding SelectedTask}" Width="auto" Height="auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel  Orientation="Vertical" Width="650">
+                                    <StackPanel Orientation="Vertical" Width="645">
                                         <StackPanel Orientation="Horizontal" Height="50" Margin="10">
                                             <Ellipse Fill="#E84545" Width="16" Height="16"></Ellipse>
-                                            <TextBlock Style="{StaticResource Text2}" TextTrimming="CharacterEllipsis" Text="{Binding Path=Name_task}" Margin="12 0 0 0"/>
+                                            <TextBlock Style="{StaticResource Text2}" TextTrimming="WordEllipsis" Width="640" Text="{Binding Path=Name_task}" Margin="12 0 0 0"/>
                                         </StackPanel>
-                                        <TextBlock Style="{StaticResource Text3}" TextWrapping="Wrap" MaxHeight="60" Margin="10 0 0 0" Text="{Binding Path=Description_task}"/>
-                                    </StackPanel>  
+                                        <TextBlock Style="{StaticResource Text3}" TextTrimming="WordEllipsis" TextWrapping="Wrap" MaxHeight="56" Width="635" Margin="10 0 0 0" Text="{Binding Path=Description_task}"/>
+                                    </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -149,12 +149,12 @@
                         <ListBox BorderThickness="0" ItemsSource="{Binding Complete_task}" SelectedItem="{Binding SelectedTask}" Margin="0" Width="auto" Height="auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" Width="645">
                                         <StackPanel Orientation="Horizontal" Height="50" Margin="10">
                                             <Ellipse Fill="#E84545" Width="16" Height="16"></Ellipse>
-                                            <TextBlock Style="{StaticResource Text2}" TextTrimming="CharacterEllipsis" Text="{Binding Path=Name_task}" Margin="12 0 0 0"/>
+                                            <TextBlock Style="{StaticResource Text2}" TextTrimming="WordEllipsis" Width="640" Text="{Binding Path=Name_task}" Margin="12 0 0 0"/>
                                         </StackPanel>
-                                        <TextBlock Style="{StaticResource Text3}"  Margin="10 0 0 0" Text="{Binding Path=Description_task}"/>
+                                        <TextBlock Style="{StaticResource Text3}" TextTrimming="WordEllipsis" TextWrapping="Wrap" MaxHeight="56" Width="635" Margin="10 0 0 0" Text="{Binding Path=Description_task}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
