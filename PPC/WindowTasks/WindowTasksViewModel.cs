@@ -102,13 +102,20 @@ namespace PPC
         }
         public void updateDB()
         {
-            using (TheBestV2Entities DB = new TheBestV2Entities())
+            if (selectedTask != null)
             {
-                Date_task DT = DB.Date_task.Find(selectedTask.Id_task);
-                DT.ID_status = 2;
-                DB.SaveChanges();
+                using (TheBestV2Entities DB = new TheBestV2Entities())
+                {
+                    Date_task DT = DB.Date_task.Find(selectedTask.Id_task);
+                    DT.ID_status = 2;
+                    DB.SaveChanges();
+                }
+                updateSourse();
             }
-            updateSourse();
+            else
+            {
+                MessageBox.Show("Нет задач на выполнение");
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
