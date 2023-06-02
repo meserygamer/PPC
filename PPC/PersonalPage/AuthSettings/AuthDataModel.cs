@@ -48,5 +48,15 @@ namespace PPC.PersonalPage
                 Application.Current.Resources["UserData"] = DB.Date_Users.Where(a => a.ID_user == Id_user).First();
             }
         }
+        public static void ChangeAuthData(string Email, int Id_user)
+        {
+            using (TheBestV2Entities DB = new TheBestV2Entities())
+            {
+                Date_Users user = DB.Date_Users.Where(a => a.ID_user == Id_user).First();
+                user.Users.Email = Email;
+                DB.SaveChanges();
+                Application.Current.Resources["UserData"] = DB.Date_Users.Where(a => a.ID_user == Id_user).First();
+            }
+        }
     }
 }

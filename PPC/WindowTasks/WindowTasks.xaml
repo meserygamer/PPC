@@ -111,7 +111,7 @@
             <ColumnDefinition Width="2.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Background="White" Margin="15,10,15,10">
-            <StackPanel Orientation="Horizontal" GotFocus="StackPanel_GotFocus">
+            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="StackPanel_GotFocus">
                 <Image Source="/WindowTasks/Avatarka.png" Height="100" Width="100" Margin="10"/>
                 <TextBlock Style="{StaticResource Text1}" >
                     <TextBlock.Text>

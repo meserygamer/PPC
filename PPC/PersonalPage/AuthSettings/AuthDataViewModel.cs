@@ -93,10 +93,18 @@ namespace PPC.PersonalPage
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
+                            AuthDataModel.ChangeAuthData(Email, ((Date_Users)Application.Current.Resources["UserData"]).Users.ID_user);
+                            if (Oldpass == "" || Oldpass == null)
+                            {
+                                ReturnFieldsDataToConfirmState();
+                                return;
+                            }
                             if(!AuthDataModel.CheckPasswordOnEquals(Oldpass, ((Date_Users)Application.Current.Resources["UserData"]).Password))
                             {
+
                                 MessageBox.Show("Введен неверный пароль");
                                 ReturnFieldsDataToConfirmState();
+
                                 return;
                             }
                             if (!AuthDataModel.CheckPassword(Newpass))
@@ -105,6 +113,7 @@ namespace PPC.PersonalPage
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
+                            MessageBox.Show("Успех");
                             AuthDataModel.ChangeAuthData(((Date_Users)Application.Current.Resources["UserData"]).Users.ID_user, Newpass, Email);
                             ReturnFieldsDataToConfirmState();
                             return;
