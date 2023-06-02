@@ -49,10 +49,8 @@ namespace PPC
                         {
                             return;
                         }
-                        RegModel.AddUser(login, Password);
-                        MessageBox.Show("Вы успешно");
-                    }
-                    ));
+                        TransferToTasks((Window)a, RegModel.AddUser(login, Password));
+                    }));
             }
         }
         public string Login
@@ -114,6 +112,13 @@ namespace PPC
                 return true;
             }
             return false;
+        }
+        public void TransferToTasks(Window CurrentWin, Date_Users UserData)
+        {
+            Application.Current.Resources["UserData"] = UserData;
+            WindowTasks WT = new WindowTasks();
+            WT.Show();
+            CurrentWin.Close();
         }
     }
     public class RelayCommand : ICommand

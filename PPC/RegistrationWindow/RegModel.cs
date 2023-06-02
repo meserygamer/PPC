@@ -8,7 +8,7 @@ namespace PPC
 {
     public class RegModel 
     {
-        public static void AddUser(string Login, string Password)
+        public static Date_Users AddUser(string Login, string Password)
         {
             Users user = new Users();
             using (TheBestV2Entities db = new TheBestV2Entities())
@@ -23,7 +23,10 @@ namespace PPC
                 db.Date_Users.Add(AuthUser);
                 db.SaveChanges();
             }
-            
+            using (TheBestV2Entities db = new TheBestV2Entities())
+            {
+                return db.Date_Users.Find(Login);
+            }
         }
         public static bool CheckLoginInSystem(string login)
         {

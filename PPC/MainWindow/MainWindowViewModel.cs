@@ -34,7 +34,7 @@ namespace PPC
                         if(CheckPasswordOnEmpty()) return;
                         User = Authorization.AuthorizationInSystem(login, password);
                         if(CheckOnFailAuthorization()) return;
-                        MessageBox.Show("Авторизация прошла успешно");}));
+                        TransferToTasks((Window)a, User);}));
             }
         }
         public string Login
@@ -81,6 +81,13 @@ namespace PPC
                 return true;
             }
             return false;
+        }
+        public void TransferToTasks(Window CurrentWin, Date_Users UserData)
+        {
+            Application.Current.Resources["UserData"] = UserData;
+            WindowTasks WT = new WindowTasks();
+            WT.Show();
+            CurrentWin.Close();
         }
     }
     public class AuthtorizationCommand : ICommand

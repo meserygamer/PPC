@@ -55,5 +55,10 @@ namespace PPC
                 but_complete.Visibility = Visibility.Hidden ;
             }   
         }
+
+        private void StackPanel_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PersonalPage.PersonalPage PP = new PersonalPage.PersonalPage();
+        }
     }
 }
