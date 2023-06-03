@@ -22,12 +22,22 @@ namespace PPC
 {
     public class WindowTasksViewModel :DependencyObject, INotifyPropertyChanged
     {
-        private WindowTasksModel selectedTask;
+        //Выбранная задача
+        #region PropertyChanged SelectedTask WindowsTaskModel
+        private WindowTasksModel _selectedTask;
+        public WindowTasksModel SelectedTask
+        {
+            get { return _selectedTask; }
+            set
+            {
+                _selectedTask = value;
+                OnPropertyChanged("SelectedTask");
+            }
+        }
+        #endregion
+        //Список активных задач
+        #region PropertyChanged ActiveTask ObservableCollection<WindowTasksModel> 
         public ObservableCollection<WindowTasksModel> _active_task;
-        public ObservableCollection<WindowTasksModel> _complete_task;
-        public static readonly DependencyProperty SurnameProperty;
-        public static readonly DependencyProperty NameProperty;
-
         public ObservableCollection<WindowTasksModel> Active_task
         {
             get { return _active_task; }
@@ -37,6 +47,10 @@ namespace PPC
                 OnPropertyChanged("Active_task");
             }
         }
+        #endregion
+        //Список завершённых задач
+        #region PropertyChanged CompleteTask ObservableCollection<WindowTasksModel>
+        public ObservableCollection<WindowTasksModel> _complete_task;
         public ObservableCollection<WindowTasksModel> Complete_task
         {
             get { return _complete_task; }
@@ -45,35 +59,40 @@ namespace PPC
                 _complete_task = value;
                 OnPropertyChanged("Complete_task");
             }
-        }        
-        public WindowTasksModel SelectedTask
-        {
-            get { return selectedTask; }
-            set
-            {
-                selectedTask = value;
-                OnPropertyChanged("SelectedTask");
-            }
         }
+        #endregion
+        //Фамилия пользователя
+        #region DependencyProperty Surname string
+        public static readonly DependencyProperty SurnameProperty;
         public string Surname
         {
             get { return (string)GetValue(SurnameProperty); }
             set { SetValue(SurnameProperty, value); }
         }
+        #endregion
+        //Имя пользователя
+        #region DependencyProperty Name string
+        public static readonly DependencyProperty NameProperty;
         public string Name
         {
             get { return (string)GetValue(NameProperty); }
             set { SetValue(NameProperty, value); }
         }
+        #endregion
+        #region DependencyProperty BoilerPlate
         static WindowTasksViewModel()
         {
             SurnameProperty = DependencyProperty.Register("Surname", typeof(string), typeof(WindowTasksViewModel));
             NameProperty = DependencyProperty.Register("Name", typeof(string), typeof(WindowTasksViewModel));
         }
+        #endregion
         public WindowTasksViewModel()
         {
             updateSourse();
         }
+        /// <summary>
+        /// Метод обновления источника данных для списка задач
+        /// </summary>
         private void updateSourse()
         {
             using (TheBestV2Entities DB = new TheBestV2Entities())
@@ -86,6 +105,11 @@ namespace PPC
                     DB.Task.ToList().Where(a => a.ID_user == ((Date_Users)Application.Current.Resources["UserData"]).ID_user).Where(a => a.Date_task.ID_status == 2).ToList()));
             }
         }
+        /// <summary>
+        /// Конвертация из List<task> в List<WindowTasksModel>
+        /// </summary>
+        /// <param name="b">Список задач из БД</param>
+        /// <returns>Возращает список задач в формате List<WindowTaskModel></returns>
         private List<WindowTasksModel> ConvertTasksToWindowModel(List<Task> b)
         {
             List<WindowTasksModel> a = new List<WindowTasksModel>();           
@@ -100,13 +124,16 @@ namespace PPC
             }
             return a;
         }
+        /// <summary>
+        /// Метод переноса задач из активных в завершённые
+        /// </summary>
         public void updateDB()
         {
-            if (selectedTask != null)
+            if (_selectedTask != null)
             {
                 using (TheBestV2Entities DB = new TheBestV2Entities())
                 {
-                    Date_task DT = DB.Date_task.Find(selectedTask.Id_task);
+                    Date_task DT = DB.Date_task.Find(_selectedTask.Id_task);
                     DT.ID_status = 2;
                     DB.SaveChanges();
                 }
@@ -117,11 +144,13 @@ namespace PPC
                 MessageBox.Show("Нет задач на выполнение");
             }
         }
+        #region PropertyChanged BoilerPlate
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
     }
 }

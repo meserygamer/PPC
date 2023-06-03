@@ -19,16 +19,9 @@ namespace PPC.PersonalPage
 {
     internal class AuthDataViewModel : DependencyObject, INotifyPropertyChanged
     {
-        #region Поля
+        //Поле хранит введённый маил
+        #region PropertyChanged Email string
         private string _email;
-        //private string _confirmEmail;
-        public static readonly DependencyProperty ConfirmEmailProperty;
-        private string _oldPass;
-        private string _newpass;
-        private StateSettings _stateOfSettings;
-        private RelayCommand _confirmSettings;
-        #endregion
-        #region Свойства
         public string Email
         {
             get { return _email; }
@@ -39,6 +32,10 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        #endregion
+        //Поле хранит введённый старый пароль
+        #region PropertyChanged OldPassword string
+        private string _oldPass;
         public string Oldpass
         {
             get { return _oldPass; }
@@ -49,6 +46,10 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        #endregion
+        //Поле хранит введённый новый пароль
+        #region PropertyChanged NewPassword string
+        private string _newpass;
         public string Newpass
         {
             get { return _newpass; }
@@ -59,26 +60,22 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
-        public string ConfirmEmail
-        { 
-            get
-            {
-                return (string)GetValue(ConfirmEmailProperty);
-            }
-            set
-            {
-                SetValue(ConfirmEmailProperty, value);
-            }
-        }
+        #endregion
+        //Хранит в себе ссостояние изменения настроек
+        #region PropertyChanged StateOfSettings StateSettings
+        private StateSettings _stateOfSettings;
         public StateSettings StateOfSettings
         {
             get { return _stateOfSettings; }
-            set 
+            set
             {
                 _stateOfSettings = value;
                 OnProperyChanged("StateOfSettings");
             }
         }
+        #endregion
+        #region Действие при нажатии на кнопку изменения данных
+        private RelayCommand _confirmSettings;
         public RelayCommand ConfirmSettings
         {
             get
@@ -87,7 +84,7 @@ namespace PPC.PersonalPage
                     (_confirmSettings = new RelayCommand(
                         a =>
                         {
-                            if(!AuthDataModel.CheckEmail(Email))
+                            if (!AuthDataModel.CheckEmail(Email))
                             {
                                 MessageBox.Show("Введенный Email некорректен");
                                 ReturnFieldsDataToConfirmState();
@@ -99,7 +96,7 @@ namespace PPC.PersonalPage
                                 ReturnFieldsDataToConfirmState();
                                 return;
                             }
-                            if(!AuthDataModel.CheckPasswordOnEquals(Oldpass, ((Date_Users)Application.Current.Resources["UserData"]).Password))
+                            if (!AuthDataModel.CheckPasswordOnEquals(Oldpass, ((Date_Users)Application.Current.Resources["UserData"]).Password))
                             {
 
                                 MessageBox.Show("Введен неверный пароль");
@@ -121,20 +118,40 @@ namespace PPC.PersonalPage
             }
         }
         #endregion
+        //Хранит в себе подтверждённый маил из статического ресурса
+        #region DependencyProperty ConfirmEmail string
+        public static readonly DependencyProperty ConfirmEmailProperty;
+        public string ConfirmEmail
+        { 
+            get
+            {
+                return (string)GetValue(ConfirmEmailProperty);
+            }
+            set
+            {
+                SetValue(ConfirmEmailProperty, value);
+            }
+        }
         static AuthDataViewModel()
         {
             ConfirmEmailProperty = DependencyProperty.Register("ConfirmEmail", typeof(string), typeof(AuthDataViewModel));
         }
+        #endregion
         public AuthDataViewModel()
         {
             Email = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;
             StateOfSettings = StateSettings.SettingsNotChanged;
         }
+        #region BoilerPlate PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
+        /// <summary>
+        /// Возращает поля к подтверждённым значениям
+        /// </summary>
         public void ReturnFieldsDataToConfirmState()
         {
             ConfirmEmail = ((Date_Users)Application.Current.Resources["UserData"]).Users.Email;

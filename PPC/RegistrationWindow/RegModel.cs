@@ -8,6 +8,12 @@ namespace PPC
 {
     public class RegModel 
     {
+        /// <summary>
+        /// Добавление пользователя в БД
+        /// </summary>
+        /// <param name="Login">Введённый логин</param>
+        /// <param name="Password">Введённый пароль</param>
+        /// <returns>Возращает строку пользователя из БД</returns>
         public static Date_Users AddUser(string Login, string Password)
         {
             Users user = new Users();
@@ -31,6 +37,11 @@ namespace PPC
                 return User;
             }
         }
+        /// <summary>
+        /// Проверка наличия введённого логина в системе
+        /// </summary>
+        /// <param name="login">Введённый логин</param>
+        /// <returns>Возвращает результат проверки</returns>
         public static bool CheckLoginInSystem(string login)
         {
             using (TheBestV2Entities db = new TheBestV2Entities())

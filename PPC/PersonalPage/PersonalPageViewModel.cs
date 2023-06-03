@@ -19,34 +19,36 @@ namespace PPC.PersonalPage
 {
     public class PersonalPageViewModel : INotifyPropertyChanged
     {
-        #region Поля
+        //Хранит в себе какое меню настроек открыто
+        #region PropetyChanged CurrentTab TabOfSettings 
         private TabOfSettings _currentTab;
-        private RelayCommand _authButton;
-        private RelayCommand _basicButton;
-        private AuthData _authData;
-        private Basic _basicData;
-        private UserControl _currentSettings;
-        #endregion
-        #region Свойства
         public TabOfSettings CurrentTab
         {
             get { return _currentTab; }
-            set {
+            set
+            {
                 _currentTab = value;
                 OnProperyChanged("CurrentTab");
             }
         }
+        #endregion
+        #region Хранит в себе действие при нажатии на кнопку настроек аутентификации
+        private RelayCommand _authButton;
         public RelayCommand AuthButton
         {
-            get {
+            get
+            {
                 return _authButton ??
                     (_authButton = new RelayCommand(a =>
                     {
                         CurrentTab = TabOfSettings.AuthSettings;
                         CurrentSettings = _authData;
-                    })); 
+                    }));
             }
         }
+        #endregion
+        #region Хранит в себе действие при нажатии на кнопку общих настроек
+        private RelayCommand _basicButton;
         public RelayCommand BasicButton
         {
             get
@@ -59,6 +61,20 @@ namespace PPC.PersonalPage
                     }));
             }
         }
+        #endregion
+        /// <summary>
+        /// Хранит в себе окно настроек аутентификации
+        /// </summary>
+        private AuthData _authData;
+        /// <summary>
+        /// Хранит в себе окно общих настроек
+        /// </summary>
+        private Basic _basicData;
+        /// <summary>
+        /// Хранит в себе текущее окно настроек
+        /// </summary>
+        #region PropetyChanged CurrentSettings UserControl
+        private UserControl _currentSettings;
         public UserControl CurrentSettings
         {
             get { return _currentSettings; }
@@ -76,12 +92,15 @@ namespace PPC.PersonalPage
             _authData = new AuthData();
             CurrentSettings = _basicData;
         }
+        #region BoilerPlate OnPropertChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
     }
+    #region BoilerPlate RelayCommand
     public class RelayCommand : ICommand
     {
         private Action<object> execute;
@@ -99,4 +118,5 @@ namespace PPC.PersonalPage
         public bool CanExecute(object parameter) => this.canExecute == null || this.canExecute(parameter);
         public void Execute(object parameter) => this.execute(parameter);
     }
+    #endregion
 }

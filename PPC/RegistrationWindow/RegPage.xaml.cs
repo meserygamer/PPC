@@ -27,7 +27,11 @@ namespace PPC
             PasswordReg.PasswordChanged += PasswordReg_PasswordChanged; ;
             ConfirmPassword.PasswordChanged += ConfirmPassword_PasswordChanged; ;
         }
-
+        /// <summary>
+        /// Привязка поля пароля к ViewModel
+        /// </summary>
+        /// <param name="sender">Отпрвитель</param>
+        /// <param name="e">Название события</param>
         private void PasswordReg_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if(this.DataContext != null)
@@ -35,6 +39,11 @@ namespace PPC
                 ((RegViewModel)this.DataContext).Password = ((PasswordBox)sender).Password;
             }
         }
+        /// <summary>
+        /// Привящка поля подтверждённого пароля к ViewModel
+        /// </summary>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="e">Название события</param>
         private void ConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)

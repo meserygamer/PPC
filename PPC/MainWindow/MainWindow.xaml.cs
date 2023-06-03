@@ -26,7 +26,11 @@ namespace PPC
             DataContext = new MainWindowViewModel();
             Password.PasswordChanged += Password_PasswordChanged;
         }
-
+        /// <summary>
+        /// Реализация привязки для поля пароля
+        /// </summary>
+        /// <param name="sender">Объект отправитель</param>
+        /// <param name="e">Заголовок события</param>
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if(this.DataContext != null)
@@ -34,7 +38,11 @@ namespace PPC
                 ((MainWindowViewModel)this.DataContext).password = ((PasswordBox)sender).Password;
             }
         }
-
+        /// <summary>
+        /// Событие клика по гиперссылке
+        /// </summary>
+        /// <param name="sender">Объект отправитель</param>
+        /// <param name="e">Заголовок события</param>
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             RegPage RegistrationWindow = new RegPage();

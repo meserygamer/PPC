@@ -11,12 +11,9 @@ namespace PPC
 {
     public class WindowTasksModel : INotifyPropertyChanged
     {
+        //Номер выбранной задачи
+        #region PropertyChanged ID_Task int
         private int id_task;
-        private string name_task;
-        private string description_task;
-        private Nullable<System.DateTime> date_start_job;
-        private Nullable<System.DateTime> date_finish_job;
-
         public int Id_task
         {
             get { return id_task; }
@@ -26,6 +23,10 @@ namespace PPC
                 OnPropertyChanged("Id_task");
             }
         }
+        #endregion
+        //Название выбранной задачи
+        #region PropertyChanged NameTask string
+        private string name_task;
         public string Name_task
         {
             get { return name_task; }
@@ -35,6 +36,10 @@ namespace PPC
                 OnPropertyChanged("Name_task");
             }
         }
+        #endregion
+        //Описание выбранной задачи
+        #region PropertyChanged DesriptionTask string
+        private string description_task;
         public string Description_task
         {
             get { return description_task; }
@@ -44,6 +49,10 @@ namespace PPC
                 OnPropertyChanged("Description_task");
             }
         }
+        #endregion
+        //Дата начала задачи
+        #region ProprtyChanged DateStartJob Nullable<System.DateTime>
+        private Nullable<System.DateTime> date_start_job;
         public Nullable<System.DateTime> Date_start_job
         {
             get { return date_start_job; }
@@ -53,6 +62,10 @@ namespace PPC
                 OnPropertyChanged("Date_start_job");
             }
         }
+        #endregion
+        //Дата окончания задачи
+        #region  ProprtyChanged DateFinishJob Nullable<System.DateTime>
+        private Nullable<System.DateTime> date_finish_job;
         public Nullable<System.DateTime> Date_finish_job
         {
             get { return date_finish_job; }
@@ -62,12 +75,14 @@ namespace PPC
                 OnPropertyChanged("Date_finish_job");
             }
         }
-
+        #endregion
+        #region BoilerPlate PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
     }
 }

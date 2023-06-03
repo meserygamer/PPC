@@ -27,13 +27,16 @@ namespace PPC.PersonalPage
             InitializeComponent();
             AuthDataViewModel Vm = new AuthDataViewModel();
             DataContext = Vm;
+            #region Привязка поля мыла к значению статического ресурса
             Binding BindingEmailToStaticResource = new Binding();
             BindingEmailToStaticResource.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
             BindingEmailToStaticResource.Path = new PropertyPath("Email");
             BindingEmailToStaticResource.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(Vm, AuthDataViewModel.ConfirmEmailProperty, BindingEmailToStaticResource);
+            #endregion
         }
     }
+    #region Класс поведения для привязки значения поля пароля
     public class PasswordBehavior : Behavior<PasswordBox>
     {
         public static readonly DependencyProperty PasswordProperty =
@@ -79,4 +82,5 @@ namespace PPC.PersonalPage
             _skipUpdate = false;
         }
     }
+    #endregion
 }

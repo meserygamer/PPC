@@ -24,6 +24,11 @@ namespace PPC.PersonalPage
             InitializeComponent();
             this.DataContext = new PersonalPageViewModel();
         }
+        /// <summary>
+        /// Открывает окно задач и закрывает текущее окно
+        /// </summary>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="e">Заголовок события</param>
         private void ClickToTask(object sender, RoutedEventArgs e)
         {
             WindowTasks PP = new WindowTasks();

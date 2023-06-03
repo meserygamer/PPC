@@ -10,6 +10,12 @@ namespace PPC
 {
     public class Authorization
     {
+        /// <summary>
+        /// Метод авторизации в системе
+        /// </summary>
+        /// <param name="Login">Введённый логин</param>
+        /// <param name="Password">Введённый пароль</param>
+        /// <returns>Запись о пользователе из БД (если пользователь не найден возвращается пустой конструктор)</returns>
         public static Date_Users AuthorizationInSystem(string Login, string Password)
         {
             List<Date_Users> Users;

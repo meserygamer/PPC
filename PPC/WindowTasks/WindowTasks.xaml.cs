@@ -28,22 +28,35 @@ namespace PPC
 
             WindowTasksViewModel viewModel = new WindowTasksViewModel();
             DataContext = viewModel;
+            #region Привязка имени к значению статического ресурса
             Binding nameToStatic = new Binding();
-            Binding surnameToStatic = new Binding();
             nameToStatic.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
-            surnameToStatic.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
             nameToStatic.Path = new PropertyPath("Name");
-            surnameToStatic.Path = new PropertyPath("Surname");
             nameToStatic.Mode = BindingMode.TwoWay;
-            surnameToStatic.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.NameProperty, nameToStatic);
+            #endregion
+            #region Привязка фамилии к статическому ресурсу
+            Binding surnameToStatic = new Binding();
+            surnameToStatic.Source = ((Date_Users)Application.Current.Resources["UserData"]).Users;
+            surnameToStatic.Path = new PropertyPath("Surname");
+            surnameToStatic.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(viewModel, WindowTasksViewModel.SurnameProperty, surnameToStatic);
-
+            #endregion
         }
+        /// <summary>
+        /// Происходит при нажатии на кнопку
+        /// </summary>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="e">Название события</param>
         private void complete_task(object sender, RoutedEventArgs e)
         {
            ((WindowTasksViewModel)(this.DataContext)).updateDB();
         }
+        /// <summary>
+        /// Пропадения кнопки при переходе на вкладку
+        /// </summary>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="e">Название события</param>
         private void ClicToTab(object sender, SelectionChangedEventArgs e)
         {
             if (tabActive.IsSelected)
@@ -55,7 +68,11 @@ namespace PPC
                 but_complete.Visibility = Visibility.Hidden ;
             }   
         }
-
+        /// <summary>
+        /// Переход на личный кабинет
+        /// </summary>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="e">Название события</param>
         private void StackPanel_GotFocus(object sender, RoutedEventArgs e)
         {
             PersonalPage.PersonalPage PP = new PersonalPage.PersonalPage();

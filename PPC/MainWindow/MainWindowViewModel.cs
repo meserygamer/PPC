@@ -20,10 +20,16 @@ namespace PPC
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         Authorization AuthorizationModel { get; set; }
-        private string login;
+        /// <summary>
+        /// Здесь хранится пароль
+        /// </summary>
         public string password {private get; set; }
-        private AuthtorizationCommand authtorizationCommand;
+        /// <summary>
+        /// Данные пользователя полученные в результате поиска по БД
+        /// </summary>
         public Date_Users User;
+        #region Команда клика по кнопке авторизации
+        private AuthtorizationCommand authtorizationCommand;
         public AuthtorizationCommand Auth
         {
             get
@@ -37,6 +43,9 @@ namespace PPC
                         TransferToTasks((Window)a, User);}));
             }
         }
+        #endregion
+        #region PropertyChanged Login String
+        private string login;
         public string Login
         {
             get { return login; }
@@ -46,15 +55,23 @@ namespace PPC
                 OnPropertyChanged("Login");
             }
         }
+        #endregion
         public MainWindowViewModel()
         {
             AuthorizationModel = new Authorization();
         }
+        #region PropertyChanged BoilerPlate
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
+        #region Public Methods
+        /// <summary>
+        /// Проверка логина на пустоту
+        /// </summary>
+        /// <returns>Возращает результат проверки</returns>
         public bool CheckLoginOnEmpty()
         {
             if(login == "" || login == null)
@@ -64,6 +81,10 @@ namespace PPC
             }
             return false;
         }
+        /// <summary>
+        /// Проверка пароля на пустоту
+        /// </summary>
+        /// <returns>Возращает результат проверки</returns>
         public bool CheckPasswordOnEmpty()
         {
             if(password == "" || password == null)
@@ -73,6 +94,10 @@ namespace PPC
             }
             return false;
         }
+        /// <summary>
+        /// Проверка на неправильную авторизацию
+        /// </summary>
+        /// <returns>Возращает результат проверки</returns>
         public bool CheckOnFailAuthorization()
         {
             if(User is null || User.ID_user is null)
@@ -82,6 +107,11 @@ namespace PPC
             }
             return false;
         }
+        /// <summary>
+        /// Переход к окну задач
+        /// </summary>
+        /// <param name="CurrentWin">Текущее окно</param>
+        /// <param name="UserData">Данные пользователя из БД</param>
         public void TransferToTasks(Window CurrentWin, Date_Users UserData)
         {
             Application.Current.Resources["UserData"] = UserData;
@@ -89,7 +119,9 @@ namespace PPC
             WT.Show();
             CurrentWin.Close();
         }
+        #endregion
     }
+    #region BoilerPlate Command
     public class AuthtorizationCommand : ICommand
     {
         private Action<object> execute;
@@ -107,4 +139,5 @@ namespace PPC
         public bool CanExecute(object parameter) => this.canExecute == null || this.canExecute(parameter);
         public void Execute(object parameter) => this.execute(parameter);
     }
+    #endregion
 }

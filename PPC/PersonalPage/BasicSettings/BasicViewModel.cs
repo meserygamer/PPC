@@ -19,28 +19,23 @@ namespace PPC.PersonalPage
 {
     public class BasicViewModel : INotifyPropertyChanged
     {
-        #region Поля
+        //Хранит имя пользователя
+        #region PropertyChanged Name string
         private string _name;
-        private string _patronymic;
-        private string _surname;
-        private string _phone;
-        private string _confirmName;
-        private string _confirmSurname;
-        private string _confirmPatronymic;
-        private string _confirmPhone;
-        private StateSettings _stateOfSettings;
-        private RelayCommand _confirmSettings;
-        #endregion
-        #region Свойства
         public string Name
         {
             get { return _name; }
-            set {
+            set
+            {
                 _name = value;
                 OnProperyChanged("Name");
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        #endregion
+        //Хранит отчество пользователя
+        #region PropertyChanged Patronymic string
+        private string _patronymic;
         public string Patronymic
         {
             get { return _patronymic; }
@@ -51,6 +46,10 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        #endregion
+        //Хранит фамилию пользователя
+        #region PropertyChanged Surname string
+        private string _surname;
         public string Surname
         {
             get { return _surname; }
@@ -61,6 +60,10 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        #endregion
+        //Хранить телефон пользователя
+        #region PropertyChanged Phone string
+        private string _phone;
         public string Phone
         {
             get { return _phone; }
@@ -71,6 +74,17 @@ namespace PPC.PersonalPage
                 StateOfSettings = StateSettings.SettingsChanged;
             }
         }
+        #endregion
+        //Хранит подтверждённое имя пользователя
+        private string _confirmName;
+        //Храни подтверждённую фамилию пользователя
+        private string _confirmSurname;
+        //Хранит подтверждённое отчество пользователя
+        private string _confirmPatronymic;
+        //Хранить подтверждённый телефон пользователя
+        private string _confirmPhone;
+        #region PropertyChaged StateOfSetting StateSettings 
+        private StateSettings _stateOfSettings;
         public StateSettings StateOfSettings
         {
             get { return _stateOfSettings; }
@@ -80,6 +94,9 @@ namespace PPC.PersonalPage
                 OnProperyChanged("StateOfSettings");
             }
         }
+        #endregion
+        #region Действие при нажатии на кнопку подтверждения изменений
+        private RelayCommand _confirmSettings;
         public RelayCommand ConfirmSettings
         {
             get
@@ -114,11 +131,16 @@ namespace PPC.PersonalPage
             _patronymic = ((Date_Users)Application.Current.Resources["UserData"]).Users.Patronymic;
             _phone = ((Date_Users)Application.Current.Resources["UserData"]).Users.Phone;
         }
+        #region ProperttyChanged BoilerPlate
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnProperyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
+        /// <summary>
+        /// Метод возвращающий значения подтверждённых полей
+        /// </summary>
         public void ReturnFieldsDataToConfirmState()
         {
             _confirmName = ((Date_Users)Application.Current.FindResource("UserData")).Users.Name;

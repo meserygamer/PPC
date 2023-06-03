@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 
 namespace PPC.PersonalPage
 {
+    /// <summary>
+    /// Хранит состояние настроек
+    /// </summary>
     public enum TabOfSettings
     {
         BasicSettings,
